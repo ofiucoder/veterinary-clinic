@@ -15,15 +15,55 @@ public class Owner{
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Primary Key
     @Column(name = "id_country") // Primary Key
     private int id;
-    private String name;
-
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+    private String dni;
+    @Column(name = "phone_number")
+    private String phoneNumber;
     
     public Owner() {
     }
 
-    public Owner(int id, String name) {
+    public Owner(int id, String firstName, String lastName, String dni, String phoneNumber) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dni = dni;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public int getId() {
@@ -33,13 +73,4 @@ public class Owner{
     public void setId(int id) {
         this.id = id;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
 }
