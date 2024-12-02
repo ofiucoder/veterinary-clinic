@@ -12,6 +12,63 @@
 
 # Diagramas realizados
 
+```mermaid
+classDiagram
+    class App{
+    }
+    namespace Model{
+    class Patient{
+        - name
+        - age
+        - breed
+        - gender
+        - idNumber
+        - tutorName
+        - tutorPhoneNumber
+        - collection of treatments.
+        + All Getters and Setters ()
+    }
+    class Appointment{
+        - dateTime
+        - patient
+        - consultationType
+        - reason
+        - status
+    }
+    class Treatment{
+        - date
+        - type
+        - notes
+    }}
+    namespace Service{
+    class PatientController{
+    }
+    class AppointmentController{
+    }
+    class TreatmentController{
+    }}
+    namespace View{
+    class HomeView{
+        - manager
+        - patient
+    }
+    class ManagerView{
+        - listPatient()
+        - addPatient()
+        - editPatient()
+        - deletePatient()
+    }
+    class PatientView{
+        - requestAppointment()
+        - viewAppointmentList()
+        - modifyAppointment()
+        - cancelAppointment()
+        - saveOrderedAppointmentList()
+    }}
+
+``` 
+
+
 # Autores
 
 @abdiaslabrador @Andreina2 @KARELIZ01 @NelliYanchuk @ofiucoder
