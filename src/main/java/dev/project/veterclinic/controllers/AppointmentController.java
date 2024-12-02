@@ -1,4 +1,4 @@
-package dev.proyect.veterclinic.controllers;
+package dev.project.veterclinic.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
