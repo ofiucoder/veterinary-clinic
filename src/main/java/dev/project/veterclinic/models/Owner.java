@@ -13,7 +13,7 @@ public class Owner{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Primary Key
-    @Column(name = "id_country") // Primary Key
+    @Column(name = "id_owner") // Primary Key
     private int id;
     @Column(name = "first_name")
     private String firstName;
