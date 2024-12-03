@@ -1,8 +1,6 @@
 package dev.project.veterclinic.models;
 
 import java.sql.Date;
-import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
