@@ -25,6 +25,13 @@ public class Owner{
     public Owner() {
     }
 
+    public Owner(String firstName, String lastName, String dni, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dni = dni;
+        this.phoneNumber = phoneNumber;
+    }
+
     public Owner(int id, String firstName, String lastName, String dni, String phoneNumber) {
         this.id = id;
         this.firstName = firstName;
