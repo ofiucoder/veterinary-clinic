@@ -1,4 +1,4 @@
-package dev.proyect.veterclinic.models;
+package dev.project.veterclinic.models;
 
 import java.sql.Date;
 import java.util.List;
@@ -26,7 +26,7 @@ public class Pets {
     private String name;
     
     @Temporal(TemporalType.DATE)
-    @Column(name = "dateOfBirth", nullable = false )
+    @Column(name = "date_of_birth", nullable = false )
     private Date dateOfBirth;
 
     @Column(name = "bread_id")
@@ -78,14 +78,14 @@ public class Pets {
         return owner_id;
     }
 
-    public List<Appointment> getAppointments() {
+ /*    public List<Appointment> getAppointments() {
         return appointments;
     }
 
     public List<Treatments> getTreatments() {
         return treatments;
     }
-
+*/
     @Override
     public String toString() {
         return String.format("Pet[id=%d, name='%s', dateOfBirth=%d, bread_id='%s', gender='%s', owner_id='%s']",
