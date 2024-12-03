@@ -8,6 +8,7 @@ Margarita is about to open her veterinary clinic for cats and dogs and has reque
 **Project Description:**
 The goal of this project is to develop a patient management system in Java that allows Margarita to list, add, edit, and delete patients. The application will also allow users to manage their appointments efficiently (request appointments, view a list of appointments, modify and cancel appointments), keeping an organized record of them.
 
+
 **Project Objectives:**
 Reinforce students' understanding of object-oriented programming concepts.
 Apply encapsulation to hide the internal implementation of classes and protect data.
@@ -70,6 +71,63 @@ Unit tests
 (Screenshot of test coverage)
 
 ## Diagrams Created
+
+```mermaid
+classDiagram
+    class App{
+    }
+    namespace Model{
+    class Patient{
+        - name
+        - age
+        - breed
+        - gender
+        - idNumber
+        - tutorName
+        - tutorPhoneNumber
+        - collection of treatments.
+        + All Getters and Setters ()
+    }
+    class Appointment{
+        - dateTime
+        - patient
+        - consultationType
+        - reason
+        - status
+    }
+    class Treatment{
+        - date
+        - type
+        - notes
+    }}
+    namespace Service{
+    class PatientController{
+    }
+    class AppointmentController{
+    }
+    class TreatmentController{
+    }}
+    namespace View{
+    class HomeView{
+        - manager
+        - patient
+    }
+    class ManagerView{
+        - listPatient()
+        - addPatient()
+        - editPatient()
+        - deletePatient()
+    }
+    class PatientView{
+        - requestAppointment()
+        - viewAppointmentList()
+        - modifyAppointment()
+        - cancelAppointment()
+        - saveOrderedAppointmentList()
+    }}
+
+``` 
+
 
 ## Authors  
 @abdiaslabrador @Andreina2 @KARELIZ01 @NelliYanchuk @ofiucoder
