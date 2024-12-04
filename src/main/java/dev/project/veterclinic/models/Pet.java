@@ -18,7 +18,7 @@ public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Primary Key
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "name", nullable = false, length = 128)
     private String name;
@@ -40,7 +40,7 @@ public class Pet {
 
     }
 
-    public Pet(Long id, String name, Date dateOfBirth, String bread_id, String gender, int owner_id ) {
+    public Pet(int id, String name, Date dateOfBirth, String bread_id, String gender, int owner_id ) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -50,7 +50,18 @@ public class Pet {
 
     }
 
-    public Long getId(){
+    public Pet(String name, Date dateOfBirth, String bread_id, String gender, int owner_id ) {
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.bread_id = bread_id;
+        this.gender = gender;
+        this.owner_id = owner_id;
+
+    }
+
+
+
+    public int getId(){
         return id;
     }
 
