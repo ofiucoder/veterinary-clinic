@@ -35,6 +35,7 @@ public class Pet {
 
     @Column(name = "owner")
     private int owner_id;    
+    private boolean deleted;  
 
     protected Pet() {
 
@@ -102,5 +103,12 @@ public class Pet {
                 id, name, dateOfBirth, bread_id, gender, owner_id);
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 
 }
