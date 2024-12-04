@@ -13,12 +13,12 @@ import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name="Pets")
-public class Pets {
+public class Pet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Primary Key
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "name", nullable = false, length = 128)
     private String name;
@@ -36,11 +36,11 @@ public class Pets {
     @Column(name = "owner")
     private int owner_id;    
 
-    protected Pets() {
+    protected Pet() {
 
     }
 
-    public Pets(Long id, String name, Date dateOfBirth, String bread_id, String gender, int owner_id ) {
+    public Pet(int id, String name, Date dateOfBirth, String bread_id, String gender, int owner_id ) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -50,7 +50,18 @@ public class Pets {
 
     }
 
-    public Long getId(){
+    public Pet(String name, Date dateOfBirth, String bread_id, String gender, int owner_id ) {
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.bread_id = bread_id;
+        this.gender = gender;
+        this.owner_id = owner_id;
+
+    }
+
+
+
+    public int getId(){
         return id;
     }
 
@@ -84,6 +95,7 @@ public class Pets {
         return treatments;
     }
 */
+
     @Override
     public String toString() {
         return String.format("Pet[id=%d, name='%s', dateOfBirth=%d, bread_id='%s', gender='%s', owner_id='%s']",
