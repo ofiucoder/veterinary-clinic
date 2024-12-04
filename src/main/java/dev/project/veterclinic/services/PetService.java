@@ -19,7 +19,7 @@ public class PetService {
     }
 
     public List<Pet> findAll(){
-        return repository.findAll();
+        return repository.findAllByDeleted (false);
     }
 
     public Pet save(PetDto petDto){
@@ -29,9 +29,15 @@ public class PetService {
 
     }
 
-     public Pet getById(int id){
+    public Pet getById(int id){
         Pet pet = repository.findById(id).orElseThrow(()-> new PetNotFoundException("Pet not found by id"));
         return pet;
     }
 
+    public void deleletById(int id){
+        Pet pet = repository.findById(id).orElseThrow(()-> new PetNotFoundException("Pet not found by id"));
+        pet.setDeleted(true);
+        repository.save(pet);
+    }
+        
 }

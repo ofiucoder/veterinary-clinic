@@ -2,11 +2,13 @@ package dev.project.veterclinic.controllers;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.project.veterclinic.dtos.PetDto;
 import dev.project.veterclinic.models.Pet;
 import dev.project.veterclinic.services.PetService;
 
@@ -25,5 +27,10 @@ public class PetController {
         return service.findAll();
     }
 
-    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletePet(@PathVariable int id){
+        service.deleletById(id);
+        return ResponseEntity.status(200).body("Deleted successfully");
+    }
+
 }
