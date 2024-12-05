@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 public class Owner{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Primary Key
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "first_name")
     private String firstName;
