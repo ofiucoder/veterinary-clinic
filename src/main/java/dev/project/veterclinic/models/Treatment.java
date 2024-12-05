@@ -31,7 +31,7 @@ public class Treatment {
     private String note;
 
     public enum TreatmentType {
-        MEDICATION, THERAPY, SURGERY, CHECKUP
+        MEDICATION, THERAPY, SURGERY, CHECKUP, OTHERS
     }
 
     public Treatment() {
