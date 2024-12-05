@@ -1,8 +1,8 @@
 package dev.project.veterclinic.models;
 
 public enum AppointmentType {
-    ORD("ordinary"),
-    URG("urgent");
+    ORDINARY("ordinary"),
+    URGENT("urgent");
 
     private final String value;
 

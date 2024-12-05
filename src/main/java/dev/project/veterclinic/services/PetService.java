@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import dev.project.veterclinic.dtos.PetDto;
-import dev.project.veterclinic.exceptions.owner.OwnerNotFoundException;
 import dev.project.veterclinic.exceptions.pet.PetNotFoundException;
 import dev.project.veterclinic.models.Pet;
 import dev.project.veterclinic.repositories.PetRepository;
