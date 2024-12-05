@@ -2,8 +2,7 @@ package dev.project.veterclinic.models;
 
 public enum AppointmentStatus {
     PENDING("pending"),
-    PASSED("passed"),
-    CANCELED("canceled");
+    PASSED("passed");
 
     private final String value;
 

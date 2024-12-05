@@ -1,4 +1,5 @@
 package dev.project.veterclinic.services;
+
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -15,19 +16,25 @@ public class AppointmentService {
         this.repository = repository;
     }
 
-    public List<Appointment> findAll(){
+    public List<Appointment> findAll() {
         return repository.findAll();
     }
 
     public Appointment save(AppointmentDto appointmentDto) {
-        Appointment appointment = new Appointment(appointmentDto.firstName(),  appointmentDto.lastName(),  appointmentDto.dni(),  appointmentDto.phoneNumber());
+        Appointment appointment = new Appointment(
+                appointmentDto.date(),
+                appointmentDto.petId(),
+                appointmentDto.type(),
+                appointmentDto.reason(),
+                appointmentDto.status(),
+                appointmentDto.ownerId());
         repository.save(appointment);
         return appointment;
     }
 
     public Appointment getById(int id) {
-        Appointment country = repository.findById(id).orElseThrow(()-> new AppointmentNotFoundException("There is no appointment with id: " + id));
-        return country;
+        Appointment app = repository.findById(id)
+                .orElseThrow(() -> new AppointmentNotFoundException("There is no appointment with id: " + id));
+        return app;
     }
 }
-
