@@ -1,44 +1,51 @@
-package dev.project.veterclinic.models;
+import java.time.LocalDate;
+
 
 public class Treatment {
-        private String name;
-        private int duration;
-        private double cost;
-    
-        public Treatment(String name, int duration, double cost) {
-            this.name = name;
-            this.duration = duration;
-            this.cost = cost;
-        }
-    
-        public String getName() {
-            return name;
-        }
-    
-        public void setName(String name) {
-            this.name = name;
-        }
-    
-        public int getDuration() {
-            return duration;
-        }
-    
-        public void setDuration(int duration) {
-            this.duration = duration;
-        }
-    
-        public double getCost() {
-            return cost;
-        }
-    
-        public void setCost(double cost) {
-            this.cost = cost;
-        }
-    
-        @Override
-        public String toString() {
-            return "Treatment: " + name + ", Duration: " + duration + " days, Cost: $" + cost;
-        }
-    }
-    
+    private int id;
+    private LocalDate date;
+    private TreatmentType type;
+    private String note;
 
+    public enum TreatmentType{
+        MEDICATION, THERAPY, SURGERY, CHECKUP
+    }
+public Treatment(int id, LocalDate date, TreatmentType type, String note) {
+    this.id = id;
+    this.date = date;
+    this.type = type;
+    this.note = note;
+}
+
+public void setId(int id) {
+    this.id = id;
+}
+
+public int getId() {
+    return Id;
+}
+
+public void setDate(LocalDate date) {
+    this.date = date;
+}
+
+public LocalDate getDate(){
+    return date;
+}
+
+public void setType(TreatmentType type) {
+    this.type = type;
+}
+
+public TreatmentType getType() {
+    return type;
+}
+
+public void setNote(String note) {
+    this.note = note;
+}
+
+public String getNote () {
+    return note;
+}
+}
