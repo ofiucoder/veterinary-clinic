@@ -13,7 +13,7 @@ public class Breed {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Primary key
-    @Column (name= "id_breed")
+    @Column (name= "Breed_id")
     private int id;
     @Column (name= "breed_name")
     private String breedName;
@@ -33,12 +33,12 @@ public class Breed {
     }
 
 
-    public int getId() {
+    public int getBread_id() {
         return id;
     }
 
 
-    public void setId(int id) {
+    public void setBread_id(int id) {
         this.id = id;
     }
 

@@ -31,3 +31,13 @@ INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_id) VALU
 INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_id) VALUES (default, '2025-04-29 06:30:00', 15, 'URGENT', 'check-up', 'PENDING', 7);
 INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_id) VALUES (default, '2024-02-18 20:30:00', 9, 'ORDINARY', 'injury', 'PASSED', 9);
 INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_id) VALUES (default, '2023-01-02 11:30:00', 15, 'ORDINARY', 'injury', 'PASSED', 9);
+
+-- tabla BREEDS
+INSERT INTO BREEDS (breed_id, breed_name, pet_type) VALUES (default, 'Persa', 'Cat');
+INSERT INTO BREEDS (breed_id, breed_name, pet_type) VALUES (default, 'Golden Retriever', 'Dog');
+INSERT INTO BREEDS (breed_id, breed_name, pet_type) VALUES (default, 'Beagle', 'Dog');
+INSERT INTO BREEDS (breed_id, breed_name, pet_type) VALUES (default, 'Siames', 'Cat');
+INSERT INTO BREEDS (breed_id, breed_name, pet_type) VALUES (default, 'Pastor Alemán', 'Dog');
+INSERT INTO BREEDS (breed_id, breed_name, pet_type) VALUES (default, 'Bulldog Francés', 'Dog');
+INSERT INTO BREEDS (breed_id, breed_name, pet_type) VALUES (default, 'Scottish Fold', 'Dog');
+INSERT INTO BREEDS (breed_id, breed_name, pet_type) VALUES (default, 'Labrador Retriever', 'Dog');

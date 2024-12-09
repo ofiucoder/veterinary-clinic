@@ -30,6 +30,10 @@ public class Pet {
     @Column(name = "bread_id")
     private String bread_id;
 
+    //@ManyToOne
+    //@JoinColumn (name = "breed_id", referencedColumnName = "Breed_id")
+    //private Breed breed; // cambia de String breed_id a un objeto breed
+
     @Column(name = "gender")
     private String gender;
 
@@ -88,7 +92,27 @@ public class Pet {
         return owner_id;
     }
 
- /*    public List<Appointment> getAppointments() {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setBread_id(String bread_id) {
+        this.bread_id = bread_id;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setOwner_id(int owner_id) {
+        this.owner_id = owner_id;
+    }
+
+/*    public List<Appointment> getAppointments() {
         return appointments;
     }
 
@@ -97,11 +121,14 @@ public class Pet {
     }
 */
 
+
+
     @Override
     public String toString() {
         return String.format("Pet[id=%d, name='%s', dateOfBirth=%d, bread_id='%s', gender='%s', owner_id='%s']",
                 id, name, dateOfBirth, bread_id, gender, owner_id);
     }
+
 
     public boolean isDeleted() {
         return deleted;
