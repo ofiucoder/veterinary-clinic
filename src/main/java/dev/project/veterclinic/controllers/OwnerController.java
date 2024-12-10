@@ -47,8 +47,8 @@ public class OwnerController {
     @GetMapping("/{id}")
     public ResponseEntity<Owner> show(@PathVariable int id) {
         
-        Owner country = service.getById(id);
+        Owner owner = service.getById(id);
 
-        return ResponseEntity.ok().body(country);
+        return ResponseEntity.ok().body(owner);
     }
 }
