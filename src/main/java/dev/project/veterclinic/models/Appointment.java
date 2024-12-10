@@ -29,14 +29,30 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment( int id, 
-                        LocalDateTime date, 
-                        int petId, 
-                        AppointmentType type, 
-                        String reason, 
-                        AppointmentStatus status, 
-                        int ownerId) {
+    public Appointment(int id,
+            LocalDateTime date,
+            int petId,
+            AppointmentType type,
+            String reason,
+            AppointmentStatus status,
+            int ownerId) {
         this.id = id;
+        this.date = date;
+        this.petId = petId;
+        this.type = type;
+        this.reason = reason;
+        this.status = status;
+        this.ownerId = ownerId;
+    }
+
+    public Appointment(
+            LocalDateTime date,
+            int petId,
+            AppointmentType type,
+            String reason,
+            AppointmentStatus status,
+            int ownerId) {
+
         this.date = date;
         this.petId = petId;
         this.type = type;
@@ -102,4 +118,3 @@ public class Appointment {
         this.ownerId = ownerId;
     }
 }
-
