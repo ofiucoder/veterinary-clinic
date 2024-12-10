@@ -38,12 +38,11 @@ public class AppointmentController {
     @PostMapping("")
     public ResponseEntity<Appointment> store(@Valid @RequestBody AppointmentDto entity) {
 
-        // Manually validate fields if necessary (Spring will also validate automatically with @Valid)
         if (entity.date() == null) {
             return ResponseEntity.badRequest().body(null);
         }
 
-        if (entity.petId() <= 0) { // Assuming petId should be positive
+        if (entity.petId() <= 0) {
             return ResponseEntity.badRequest().body(null);
         }
 
@@ -59,7 +58,7 @@ public class AppointmentController {
             return ResponseEntity.badRequest().body(null);
         }
 
-        if (entity.ownerId() <= 0) { // Assuming ownerId should be positive
+        if (entity.ownerId() <= 0) { 
             return ResponseEntity.badRequest().body(null);
         }
 
