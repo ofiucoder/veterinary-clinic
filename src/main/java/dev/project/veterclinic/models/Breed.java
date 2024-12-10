@@ -45,12 +45,12 @@ public class Breed {
     }
 
 
-    public int getId() {
+    public int getBread_id() {
         return id;
     }
 
 
-    public void setId(int id) {
+    public void setBread_id(int id) {
         this.id = id;
     }
 

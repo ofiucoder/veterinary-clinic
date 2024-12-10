@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.project.veterclinic.models.Pet;
 import dev.project.veterclinic.services.PetService;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping(path = "${api-endpoint}/pets")
@@ -33,4 +36,14 @@ public class PetController {
         return ResponseEntity.status(200).body("Deleted successfully");
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Pet> updatePet(@PathVariable int id, @RequestBody Pet updatePet) {
+        try {Pet pet = service.updateById(id, updatePet);
+        
+        return ResponseEntity.ok(pet);
+    } catch (RuntimeException e) {
+
+        return ResponseEntity.status(404).body(null); //return 404 if is not found
+        }
+    }
 }

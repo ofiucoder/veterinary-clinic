@@ -1,9 +1,6 @@
 package dev.project.veterclinic.models;
 
-import java.sql.Date;
-
-import dev.project.veterclinic.interfaces.Treatments;
-import jakarta.persistence.CascadeType;
+import java.time.LocalDateTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -15,8 +12,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "Pets")
@@ -29,23 +24,20 @@ public class Pet {
 
     @Column(name = "name", nullable = false, length = 128)
     private String name;
+    
+    @Column(name = "date_of_birth", nullable = false )
+    private LocalDateTime dateOfBirth;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "date_of_birth", nullable = false)
-    private Date dateOfBirth;
-
+ 
     @Column(name = "gender")
     private String gender;
 
     @Column(name = "owner")
-    private int owner_id;
-    private boolean deleted;
+    private int owner_id;    
 
-    protected Pet() {
 
-    }
+    public Pet(int id, String name, LocalDateTime dateOfBirth,  String gender, int owner_id ) {
 
-    public Pet(int id, String name, Date dateOfBirth, String gender, int owner_id) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -54,7 +46,7 @@ public class Pet {
 
     }
 
-    public Pet(String name, Date dateOfBirth, String gender, int owner_id) {
+    public Pet(String name, LocalDateTime dateOfBirth, String gender, int owner_id ) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
@@ -70,7 +62,7 @@ public class Pet {
         return name;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDateTime getDateOfBirth(){
         return dateOfBirth;
     }
 
@@ -118,12 +110,21 @@ public class Pet {
                 id, name, dateOfBirth, gender, owner_id);
     }
 
-    public boolean isDeleted() {
-        return deleted;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
+    public void setOwner_id(int owner_id) {
+        this.owner_id = owner_id;
     }
 
+    public void setName(String name2) {
+        this.name = name2;
+        
+    }
+
+    public void setDateOfBirth(LocalDateTime dateOfBirth2) {
+        this.dateOfBirth = dateOfBirth2;
+        
+    }
 }

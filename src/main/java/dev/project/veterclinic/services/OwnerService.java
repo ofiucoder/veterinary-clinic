@@ -27,7 +27,7 @@ public class OwnerService {
     }
 
     public Owner getById(int id) {
-        Owner country = repository.findById(id).orElseThrow(()-> new OwnerNotFoundException("Owner not found by id"));
-        return country;
+        Owner owner = repository.findById(id).orElseThrow(()-> new OwnerNotFoundException("Owner not found by id"));
+        return owner;
     }
 }

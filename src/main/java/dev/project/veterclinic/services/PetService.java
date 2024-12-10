@@ -1,6 +1,7 @@
 package dev.project.veterclinic.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class PetService {
     }
 
     public List<Pet> findAll(){
-        return repository.findAllByDeleted (false);
+        return repository.findAll();
     }
 
     public Pet save(PetDto petDto){
@@ -35,8 +36,27 @@ public class PetService {
 
     public void deleletById(int id){
         Pet pet = repository.findById(id).orElseThrow(()-> new PetNotFoundException("Pet not found by id"));
-        pet.setDeleted(true);
-        repository.save(pet);
+        repository.delete(pet);
+        
+    }
+
+    public Pet updateById (int id, Pet updatePet) {
+        Optional<Pet> existingPet= repository.findById(id); // Optional maneja valores que pueden o no estar presentes, icluye el metodo isPresent
+        if (existingPet.isPresent()) {
+            Pet pet = existingPet.get();
+            pet.setName(updatePet.getName());
+            pet.setDateOfBirth(updatePet.getDateOfBirth());
+//            pet.setBread_id(updatePet.getBread_id());
+            pet.setGender(updatePet.getGender());
+//            pet.setOwner_id(updatePet.getOwnerId());
+
+            return repository.save(pet);
+
+        }
+
+        else {
+            throw new RuntimeException ("Pet not found with ID" + id);
+        }
     }
         
 }
