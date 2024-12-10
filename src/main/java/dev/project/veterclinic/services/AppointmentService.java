@@ -1,6 +1,7 @@
 package dev.project.veterclinic.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -43,6 +44,11 @@ public class AppointmentService {
     // Find appointments by ownerId and order by date
     public List<Appointment> findAppointmentsByOwnerId(int ownerId) {
         return repository.findByOwnerIdOrderByDateAsc(ownerId);
+    }
+
+    // Find appointment by ownerId and appointmentId
+    public Optional<Appointment> findAppointmentByOwnerIdAndAppId(int ownerId, int appointmentId) {
+        return repository.findByOwnerIdAndId(ownerId, appointmentId);
     }
 
     // Update an existing appointment (modifying an existing one)
