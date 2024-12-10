@@ -6,7 +6,6 @@ import dev.project.veterclinic.models.AppointmentType;
 import java.time.LocalDateTime;
 
 public record AppointmentDto(
-    int id,
     LocalDateTime date,
     int petId,
     AppointmentType type,
