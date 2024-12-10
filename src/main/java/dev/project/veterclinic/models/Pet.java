@@ -1,6 +1,6 @@
 package dev.project.veterclinic.models;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +25,7 @@ public class Pet {
     
     @Temporal(TemporalType.DATE)
     @Column(name = "date_of_birth", nullable = false )
-    private Date dateOfBirth;
+    private LocalDateTime dateOfBirth;
 
     @Column(name = "bread_id")
     private String bread_id;
@@ -39,13 +39,12 @@ public class Pet {
 
     @Column(name = "owner")
     private int owner_id;    
-    private boolean deleted;  
 
     protected Pet() {
 
     }
 
-    public Pet(int id, String name, Date dateOfBirth, String bread_id, String gender, int owner_id ) {
+    public Pet(int id, String name, LocalDateTime dateOfBirth, String bread_id, String gender, int owner_id ) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -55,7 +54,7 @@ public class Pet {
 
     }
 
-    public Pet(String name, Date dateOfBirth, String bread_id, String gender, int owner_id ) {
+    public Pet(String name, LocalDateTime dateOfBirth, String bread_id, String gender, int owner_id ) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.bread_id = bread_id;
@@ -63,8 +62,6 @@ public class Pet {
         this.owner_id = owner_id;
 
     }
-
-
 
     public int getId(){
         return id;
@@ -74,7 +71,7 @@ public class Pet {
         return name;
     }
 
-    public Date getDateOfBirth(){
+    public LocalDateTime getDateOfBirth(){
         return dateOfBirth;
     }
 
@@ -96,7 +93,7 @@ public class Pet {
         this.name = name;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDateTime dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -112,30 +109,9 @@ public class Pet {
         this.owner_id = owner_id;
     }
 
-/*    public List<Appointment> getAppointments() {
-        return appointments;
-    }
-
-    public List<Treatments> getTreatments() {
-        return treatments;
-    }
-*/
-
-
-
     @Override
     public String toString() {
         return String.format("Pet[id=%d, name='%s', dateOfBirth=%d, bread_id='%s', gender='%s', owner_id='%s']",
                 id, name, dateOfBirth, bread_id, gender, owner_id);
     }
-
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
-
 }
