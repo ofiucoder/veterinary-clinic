@@ -22,7 +22,7 @@ public class PetService {
     }
 
     public Pet save(PetDto petDto){
-        Pet pet = new Pet(petDto.name(), petDto.dateOfBirth(), petDto.bread_id(), petDto.gender(), petDto.owner_id() );
+        Pet pet = new Pet(petDto.name(), petDto.dateOfBirth(), petDto.gender(), petDto.owner_id() );
         repository.save(pet);
         return pet;
 
