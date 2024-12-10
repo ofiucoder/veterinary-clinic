@@ -23,7 +23,6 @@ public class Pet {
     @Column(name = "name", nullable = false, length = 128)
     private String name;
     
-    @Temporal(TemporalType.DATE)
     @Column(name = "date_of_birth", nullable = false )
     private LocalDateTime dateOfBirth;
 
