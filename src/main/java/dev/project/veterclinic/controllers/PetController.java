@@ -6,9 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.project.veterclinic.dtos.PetDto;
+import dev.project.veterclinic.dtos.petDtoResponse.PetDtoResponse;
 import dev.project.veterclinic.models.Pet;
 import dev.project.veterclinic.services.PetService;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,6 +31,12 @@ public class PetController {
     @GetMapping("")
     public List<Pet> index(){
         return service.findAll();
+    }
+
+    @PostMapping("")
+    public ResponseEntity<PetDtoResponse> store(@RequestBody PetDto entity){
+        PetDtoResponse pet = service.save(entity);
+        return ResponseEntity.status(201).body(pet);
     }
 
     @DeleteMapping("/{id}")

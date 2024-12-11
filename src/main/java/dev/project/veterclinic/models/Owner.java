@@ -1,14 +1,12 @@
 package dev.project.veterclinic.models;
-
+import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import dev.project.veterclinic.models.Pet;
 
 @Entity
 @Table(name = "OWNERS")
@@ -21,14 +19,14 @@ public class Owner{
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
+    @Column(unique=true)
     private String dni;
     @Column(name = "phone_number")
     private String phoneNumber;
     
+    
     @OneToMany(mappedBy="owner")
     public List<Pet> pets;
-
-
 
     public Owner() {
     }
