@@ -29,7 +29,7 @@ public class PetController {
     }
 
     @GetMapping("")
-    public List<Pet> index(){
+    public List<PetDtoResponse> index(){
         return service.findAll();
     }
 

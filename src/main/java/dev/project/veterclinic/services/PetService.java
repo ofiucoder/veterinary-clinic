@@ -1,5 +1,6 @@
 package dev.project.veterclinic.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
@@ -28,8 +29,30 @@ public class PetService {
         this.breedRepository = breedRepository;
     }
 
-    public List<Pet> findAll(){
-        return petRepository.findAll();
+    public List<PetDtoResponse> findAll(){
+        List<Pet> petList = petRepository.findAll();
+        List<PetDtoResponse> petDtoList = new ArrayList<>();
+        for (Pet pet : petList) {
+            petDtoList.add(new PetDtoResponse(
+                 pet.getId(),
+                 pet.getName(),
+                 pet.getDateOfBirth(),
+                 pet.getGender(),
+                 pet.getPetType(),
+                 new  PetBreedDtoResponse(
+                    pet.getBreed().getId(),
+                    pet.getBreed().getBreedName()
+                 ),
+                 new  PetOwnerDtoReponse(
+                    pet.getOwner().getId(),
+                    pet.getOwner().getFirstName(),
+                    pet.getOwner().getLastName(),
+                    pet.getOwner().getDni(),
+                    pet.getOwner().getPhoneNumber()
+                 )
+            ));
+        }
+        return petDtoList;
     }
 
     public PetDtoResponse save(PetDto petDto){

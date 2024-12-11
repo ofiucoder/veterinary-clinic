@@ -1,7 +1,3 @@
---tabla breeds
-INSERT INTO breeds (breed_name)
-VALUES ('Golden Retriever');
-
 INSERT INTO breeds (breed_name)
 VALUES ('Siamese');
 
@@ -33,7 +29,7 @@ INSERT INTO breeds (breed_name)
 VALUES ('German Shepherd');
 
 INSERT INTO breeds (breed_name)
-VALUES ('Persa');
+VALUES ('Persian');
 
 INSERT INTO breeds (breed_name)
 VALUES ('Labrador Retriever');
