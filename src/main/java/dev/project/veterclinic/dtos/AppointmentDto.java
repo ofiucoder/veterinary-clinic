@@ -1,9 +1,9 @@
 package dev.project.veterclinic.dtos;
 
-import dev.project.veterclinic.models.AppointmentStatus;
-import dev.project.veterclinic.models.AppointmentType;
-
 import java.time.LocalDateTime;
+
+import dev.project.veterclinic.enums.AppointmentStatus;
+import dev.project.veterclinic.enums.AppointmentType;
 
 public record AppointmentDto(
     LocalDateTime date,

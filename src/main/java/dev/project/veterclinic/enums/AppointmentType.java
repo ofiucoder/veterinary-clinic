@@ -1,4 +1,4 @@
-package dev.project.veterclinic.models;
+package dev.project.veterclinic.enums;
 
 public enum AppointmentType {
     ORDINARY("ordinary"),

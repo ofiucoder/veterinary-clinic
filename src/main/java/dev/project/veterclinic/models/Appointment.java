@@ -3,6 +3,9 @@ package dev.project.veterclinic.models;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+import dev.project.veterclinic.enums.AppointmentStatus;
+import dev.project.veterclinic.enums.AppointmentType;
+
 @Entity
 @Table(name = "APPOINTMENTS")
 public class Appointment {

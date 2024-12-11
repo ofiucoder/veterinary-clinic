@@ -1,15 +1,21 @@
 package dev.project.veterclinic.models;
-
 import java.time.LocalDateTime;
+
+import dev.project.veterclinic.enums.PetType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="Pets")
+@Table(name = "Pets")
 public class Pet {
 
     @Id
@@ -19,95 +25,98 @@ public class Pet {
 
     @Column(name = "name", nullable = false, length = 128)
     private String name;
-    
-    @Column(name = "date_of_birth", nullable = false )
+
+    @Column(name = "date_of_birth", nullable = false)
     private LocalDateTime dateOfBirth;
-
-    @Column(name = "bread_id")
-    private String bread_id;
-
-    //@ManyToOne
-    //@JoinColumn (name = "breed_id", referencedColumnName = "Breed_id")
-    //private Breed breed; // cambia de String breed_id a un objeto breed
 
     @Column(name = "gender")
     private String gender;
 
-    @Column(name = "owner")
-    private int owner_id;    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "pet_type")
+    private PetType petType;
 
-    protected Pet() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "breed_id")
+    private Breed breed;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
+
+    public Pet() {
 
     }
 
-    public Pet(int id, String name, LocalDateTime dateOfBirth, String bread_id, String gender, int owner_id ) {
+    public Pet(int id, String name, LocalDateTime dateOfBirth, PetType petType, String gender, Breed breed, Owner owner) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
-        this.bread_id = bread_id;
         this.gender = gender;
-        this.owner_id = owner_id;
-
+        this.petType = petType;
+        this.breed = breed;
+        this.owner = owner;
     }
 
-    public Pet(String name, LocalDateTime dateOfBirth, String bread_id, String gender, int owner_id ) {
+    public Pet(String name, LocalDateTime dateOfBirth, PetType petType, String gender, Breed breed, Owner owner) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
-        this.bread_id = bread_id;
         this.gender = gender;
-        this.owner_id = owner_id;
-
+        this.petType = petType;
+        this.breed = breed;
+        this.owner = owner;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public LocalDateTime getDateOfBirth(){
+    public LocalDateTime getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public String getBread_id(){
-        return bread_id;
-
-    }
-
-    public String getGender(){
+    public String getGender() {
         return gender;
-
-    }
-
-    public int getOwnerId(){
-        return owner_id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public void setBread_id(String bread_id) {
-        this.bread_id = bread_id;
     }
 
     public void setGender(String gender) {
         this.gender = gender;
     }
 
-    public void setOwner_id(int owner_id) {
-        this.owner_id = owner_id;
+    public void setName(String name2) {
+        this.name = name2;
     }
 
-    @Override
-    public String toString() {
-        return String.format("Pet[id=%d, name='%s', dateOfBirth=%d, bread_id='%s', gender='%s', owner_id='%s']",
-                id, name, dateOfBirth, bread_id, gender, owner_id);
+    public void setDateOfBirth(LocalDateTime dateOfBirth2) {
+        this.dateOfBirth = dateOfBirth2;
+    }
+
+    public Breed getBreed() {
+        return breed;
+    }
+
+    public void setBreed(Breed breed) {
+        this.breed = breed;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
+    public PetType getPetType() {
+        return this.petType;
+    }
+
+
+    public void setPetType(PetType petType) {
+        this.petType = petType;
     }
 }
