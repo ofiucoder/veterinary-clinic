@@ -52,19 +52,30 @@ public class AppointmentService {
     }
 
     // Update an existing appointment (modifying an existing one)
-    public Appointment updateAppointment(int appointmentId, AppointmentDto appointmentDto) {
+    public Appointment updateAppointment(int ownerId, int appointmentId, AppointmentDto appointmentDto) {
         // Fetch the existing appointment by ID
-        Appointment existingAppointment = repository.findById(appointmentId)
-                .orElseThrow(() -> new AppointmentNotFoundException("Appointment not found with id: " + appointmentId));
-
+        Appointment existingAppointment = repository.findByOwnerIddAndAppointmentId(ownerId, appointmentId);
+        if(existingAppointment == null){
+            throw new AppointmentNotFoundException("Appointment not found");
+        }
+        
         // Update the appointment fields
         existingAppointment.setDate(appointmentDto.date());
-        existingAppointment.setPetId(appointmentDto.petId());
+        existingAppointment.setPet(appointmentDto.pet());
         existingAppointment.setType(appointmentDto.type());
         existingAppointment.setReason(appointmentDto.reason());
         existingAppointment.setStatus(appointmentDto.status());
+        existingAppointment.setOwner(appointmentDto.owner());
 
         // Save and return the updated appointment
         return repository.save(existingAppointment);
     }
+
+    public void deleteById(int ownerId, int appointmentId) {
+        Appointment existingAppointment = repository.findByOwnerIddAndAppointmentId(ownerId, appointmentId);
+        if(existingAppointment == null){
+            throw new AppointmentNotFoundException("Appointment not found");
+        }
+        repository.delete(existingAppointment);
+    } 
 }

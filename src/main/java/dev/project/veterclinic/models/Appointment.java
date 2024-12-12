@@ -16,8 +16,6 @@ public class Appointment {
     private int id;
     @Column(name = "date")
     private LocalDateTime date;
-    @Column(name = "pet_id")
-    private int petId;
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
     private AppointmentType type;
@@ -26,45 +24,41 @@ public class Appointment {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private AppointmentStatus status;
-    @Column(name = "owner_id")
-    private int ownerId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pet_id")
+    private Pet pet;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
+
+    public Appointment(LocalDateTime date, AppointmentType type, String reason, AppointmentStatus status,
+            Pet pet, Owner owner) {
+        this.date = date;
+        this.type = type;
+        this.reason = reason;
+        this.status = status;
+        this.pet = pet;
+        this.owner = owner;
+    }
+
+    public Appointment(int id, LocalDateTime date, AppointmentType type, String reason, AppointmentStatus status,
+            Pet pet, Owner owner) {
+        this.id = id;
+        this.date = date;
+        this.type = type;
+        this.reason = reason;
+        this.status = status;
+        this.pet = pet;
+        this.owner = owner;
+    }
 
     public Appointment() {
     }
 
-    public Appointment(int id,
-            LocalDateTime date,
-            int petId,
-            AppointmentType type,
-            String reason,
-            AppointmentStatus status,
-            int ownerId) {
-        this.id = id;
-        this.date = date;
-        this.petId = petId;
-        this.type = type;
-        this.reason = reason;
-        this.status = status;
-        this.ownerId = ownerId;
-    }
+    
 
-    public Appointment(
-            LocalDateTime date,
-            int petId,
-            AppointmentType type,
-            String reason,
-            AppointmentStatus status,
-            int ownerId) {
-
-        this.date = date;
-        this.petId = petId;
-        this.type = type;
-        this.reason = reason;
-        this.status = status;
-        this.ownerId = ownerId;
-    }
-
-    // Getters and setters
     public int getId() {
         return id;
     }
@@ -79,14 +73,6 @@ public class Appointment {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
-    }
-
-    public int getPetId() {
-        return petId;
-    }
-
-    public void setPetId(int petId) {
-        this.petId = petId;
     }
 
     public AppointmentType getType() {
@@ -113,11 +99,19 @@ public class Appointment {
         this.status = status;
     }
 
-    public int getOwnerId() {
-        return ownerId;
+    public Pet getPet() {
+        return pet;
     }
 
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
+    public void setPet(Pet pet) {
+        this.pet = pet;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 }

@@ -28,6 +28,9 @@ public class Owner{
     @OneToMany(mappedBy="owner")
     public List<Pet> pets;
 
+    @OneToMany(mappedBy="owner")
+    public List<Appointment> appointments;
+
     public Owner() {
     }
 

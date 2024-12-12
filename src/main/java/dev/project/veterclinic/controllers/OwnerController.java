@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -78,12 +79,12 @@ public class OwnerController {
     // Update an appointment by ownerId and appointmentId
     @PutMapping("/{ownerId}/appointments/{appointmentId}")
     public ResponseEntity<Appointment> updateAppointment(
-            @PathVariable int ownerId,
+            @PathVariable int ownerId, 
             @PathVariable int appointmentId,
             @RequestBody AppointmentDto appointmentDto) {
 
         // Validate if the appointment belongs to the ownerId
-        Appointment updatedAppointment = appointmentService.updateAppointment(appointmentId, appointmentDto);
+        Appointment updatedAppointment = appointmentService.updateAppointment(ownerId, appointmentId, appointmentDto);
 
         return ResponseEntity.ok(updatedAppointment);
     }
@@ -98,5 +99,13 @@ public class OwnerController {
         }
 
         return ResponseEntity.ok(appointment.get());  // Return the appointment if found
+    }
+
+    // Get a specific appointment for a specific owner
+    @DeleteMapping("/{ownerId}/appointments/{appointmentId}")
+    public ResponseEntity<String> deleteOwnerAppointment(@PathVariable int ownerId, @PathVariable int appointmentId) {
+        appointmentService.deleteById(ownerId, appointmentId);
+        return ResponseEntity.status(200).body("Deleted successfully");
+
     }
 }

@@ -74,7 +74,9 @@ VALUES ('Carlos', 'Lopez', '34567890', '5555555555');
 -- tabla PETS
 
 -- table APPOINTMENT
-/*INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_id) VALUES (default, '2020-03-15 09:30:00', 1, 'URGENT', 'bleeding', 'PASSED', 6);
+INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_id, owner_idd) VALUES (default, '2022-04-19 10:30:00', 3, 'ORDINARY', 'sore eyes', 'PASSED', 9, 1);
+/*
+INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_id) VALUES (default, '2020-03-15 09:30:00', 1, 'URGENT', 'bleeding', 'PASSED', 6);
 INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_id) VALUES (default, '2022-04-19 10:30:00', 3, 'ORDINARY', 'sore eyes', 'PASSED', 9);
 INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_id) VALUES (default, '2025-03-13 01:00:00', 5, 'ORDINARY', 'check-up', 'PENDING', 2);
 INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_id) VALUES (default, '2023-09-05 07:00:00', 2, 'ORDINARY', 'stomach pain', 'PASSED', 9);
