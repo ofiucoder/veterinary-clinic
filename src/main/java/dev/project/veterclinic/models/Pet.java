@@ -1,8 +1,10 @@
 package dev.project.veterclinic.models;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 import dev.project.veterclinic.enums.PetType;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -46,9 +48,9 @@ public class Pet {
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
-    @OneToMany(mappedBy="pet")
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Appointment> appointments;
-    
+
     public Pet() {
 
     }
@@ -119,7 +121,6 @@ public class Pet {
     public PetType getPetType() {
         return this.petType;
     }
-
 
     public void setPetType(PetType petType) {
         this.petType = petType;
