@@ -1,5 +1,6 @@
 package dev.project.veterclinic.models;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import dev.project.veterclinic.enums.PetType;
 import jakarta.persistence.Column;
@@ -12,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -44,6 +46,9 @@ public class Pet {
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
+    @OneToMany(mappedBy="pet")
+    public List<Appointment> appointments;
+    
     public Pet() {
 
     }

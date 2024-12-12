@@ -94,3 +94,37 @@ VALUES
   (18, 2, '2023-07-29', 'Mia', 'Female', 'CAT'),
   (19, 3, '2022-12-21', 'Duke', 'Male', 'DOG'),
   (20, 1, '2021-06-16', 'Sophie', 'Female', 'DOG');
+
+-- tabla APPOINTMENTS
+INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_dni)
+VALUES (default, '2020-03-15 09:30:00', 1, 'URGENT', 'bleeding', 'PASSED', '12345678');
+
+INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_dni)
+VALUES (default, '2020-04-10 10:00:00', 2, 'URGENT', 'vaccination', 'PENDING', '23456789');
+
+INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_dni)
+VALUES (default, '2020-05-20 11:30:00', 3, 'ORDINARY', 'injury', 'PASSED', '34567890');
+
+INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_dni)
+VALUES (default, '2020-06-15 09:00:00', 4, 'ORDINARY', 'check-up', 'PENDING', '12345678');
+
+INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_dni)
+VALUES (default, '2020-07-25 10:30:00', 5, 'URGENT', 'allergy', 'PASSED', '12345678');
+
+INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_dni)
+VALUES (default, '2020-08-10 11:00:00', 6, 'ORDINARY', 'dental care', 'PENDING', '23456789');
+
+INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_dni)
+VALUES (default, '2020-09-20 09:30:00', 7, 'URGENT', 'poisoning', 'PASSED', '34567890');
+
+INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_dni)
+VALUES (default, '2020-10-15 10:30:00', 8, 'ORDINARY', 'parasite control', 'PENDING', '12345678');
+
+INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_dni)
+VALUES (default, '2020-11-25 11:00:00', 9, 'URGENT', 'infection', 'PASSED', '12345678');
+
+INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_dni)
+VALUES (default, '2020-12-10 09:00:00', 10, 'ORDINARY', 'nutrition advice', 'PENDING', '23456789');
+
+INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_dni) 
+VALUES (default, '2020-03-15 09:30:00', 1, 'URGENT', 'bleeding', 'PASSED', '12345678');
