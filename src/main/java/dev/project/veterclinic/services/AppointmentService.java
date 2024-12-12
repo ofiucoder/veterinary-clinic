@@ -1,5 +1,6 @@
 package dev.project.veterclinic.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +50,11 @@ public class AppointmentService {
     // Find appointment by ownerId and appointmentId
     public Optional<Appointment> findAppointmentByOwnerIdAndAppId(int ownerId, int appointmentId) {
         return repository.findByOwnerIdAndId(ownerId, appointmentId);
+    }
+
+    public List<Appointment> getAppointmentsByOwnerAndDate(int ownerId, LocalDateTime date) {
+        // Check if an appointment exists with the same owner_id and date
+        return repository.findByOwnerIdAndDate(ownerId, date);
     }
 
     // Update an existing appointment (modifying an existing one)

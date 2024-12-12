@@ -3,6 +3,7 @@ package dev.project.veterclinic.repositories;
 import dev.project.veterclinic.models.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,4 +14,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 
     // Method to find appointment by ownerId and appointmentId
     Optional<Appointment> findByOwnerIdAndId(int ownerId, int appointmentId);
+
+    // method to find appointments by owner_id and date
+    List<Appointment> findByOwnerIdAndDate(int ownerId, LocalDateTime date);
 }
