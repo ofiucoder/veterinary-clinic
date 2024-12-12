@@ -1,6 +1,7 @@
 package dev.project.veterclinic.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,20 +32,25 @@ public class OwnerController {
     }
 
     @GetMapping("")
-    public List<Owner> index(){
+    public List<Owner> index() {
         return ownerService.findAll();
     }
 
     @PostMapping("")
     public ResponseEntity<Owner> store(@RequestBody OwnerDto entity) {
-        if (entity.firstName() == "" || entity.firstName() == null) return ResponseEntity.badRequest().build();
-        if (entity.lastName() == "" || entity.lastName() == null) return ResponseEntity.badRequest().build();
-        if (entity.dni() == "" || entity.dni() == null) return ResponseEntity.badRequest().build();
-        if (entity.phoneNumber() == "" || entity.phoneNumber() == null ) return ResponseEntity.badRequest().build();
+        if (entity.firstName() == "" || entity.firstName() == null)
+            return ResponseEntity.badRequest().build();
+        if (entity.lastName() == "" || entity.lastName() == null)
+            return ResponseEntity.badRequest().build();
+        if (entity.dni() == "" || entity.dni() == null)
+            return ResponseEntity.badRequest().build();
+        if (entity.phoneNumber() == "" || entity.phoneNumber() == null)
+            return ResponseEntity.badRequest().build();
 
         Owner owner = ownerService.save(entity);
 
-        if (owner == null) return ResponseEntity.noContent().build();
+        if (owner == null)
+            return ResponseEntity.noContent().build();
 
         return ResponseEntity.status(201).body(owner);
     }
@@ -52,7 +58,7 @@ public class OwnerController {
     // get by id
     @GetMapping("/{id}")
     public ResponseEntity<Owner> show(@PathVariable int id) {
-        
+
         Owner owner = ownerService.getById(id);
         return ResponseEntity.ok().body(owner);
     }
@@ -69,16 +75,28 @@ public class OwnerController {
         return ResponseEntity.ok(appointments);
     }
 
-     // Update an appointment by ownerId and appointmentId
-     @PutMapping("/{ownerId}/appointments/{appointmentId}")
-     public ResponseEntity<Appointment> updateAppointment(
-             @PathVariable int ownerId,
-             @PathVariable int appointmentId,
-             @RequestBody AppointmentDto appointmentDto) {
- 
-         // Validate if the appointment belongs to the ownerId
-         Appointment updatedAppointment = appointmentService.updateAppointment(appointmentId, appointmentDto);
- 
-         return ResponseEntity.ok(updatedAppointment);
-     }
+    // Update an appointment by ownerId and appointmentId
+    @PutMapping("/{ownerId}/appointments/{appointmentId}")
+    public ResponseEntity<Appointment> updateAppointment(
+            @PathVariable int ownerId,
+            @PathVariable int appointmentId,
+            @RequestBody AppointmentDto appointmentDto) {
+
+        // Validate if the appointment belongs to the ownerId
+        Appointment updatedAppointment = appointmentService.updateAppointment(appointmentId, appointmentDto);
+
+        return ResponseEntity.ok(updatedAppointment);
+    }
+
+    // Get a specific appointment for a specific owner
+    @GetMapping("/{ownerId}/appointments/{appointmentId}")
+    public ResponseEntity<Appointment> showOwnerAppointment(@PathVariable int ownerId, @PathVariable int appointmentId) {
+        Optional<Appointment> appointment = appointmentService.findAppointmentByOwnerIdAndAppId(ownerId, appointmentId);
+
+        if (appointment.isEmpty()) {
+            return ResponseEntity.notFound().build();  // Return 404 if the appointment is not found
+        }
+
+        return ResponseEntity.ok(appointment.get());  // Return the appointment if found
+    }
 }

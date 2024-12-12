@@ -4,13 +4,18 @@ import java.time.LocalDateTime;
 
 import dev.project.veterclinic.enums.PetType;
 
-public record PetDto(
-    String name, 
+public record PatientDto(
+    String name,
     LocalDateTime dateOfBirth,
     String gender,
     PetType petType,
-    String breed,
-    int ownerId
+    String breedName,
+    String ownerFirstName,
+    String ownerLastName,
+    String ownerDni,
+    String ownerPhoneNumber
 ) {
-
 }
+
+
+   

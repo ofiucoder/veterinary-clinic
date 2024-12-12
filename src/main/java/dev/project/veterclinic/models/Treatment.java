@@ -53,7 +53,7 @@ public class Treatment {
         this.note = note;
     }
 
-    // Getters and setters
+    
     public int getId() {
         return id;
     }
