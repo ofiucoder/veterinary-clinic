@@ -3,7 +3,6 @@ package dev.project.veterclinic.services;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import dev.project.veterclinic.dtos.AppointmentDto;
 import dev.project.veterclinic.dtos.appointmentDtoResponse.AppointDtoRsponse;
