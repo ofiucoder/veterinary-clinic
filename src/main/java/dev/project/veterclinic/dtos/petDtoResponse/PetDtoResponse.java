@@ -10,7 +10,7 @@ public record PetDtoResponse (
      LocalDateTime  dateOfBirth,
      String gender ,
      PetType petType ,
-     PetBreedDtoResponse breed ,
+     PetBreedDtoResponse breed,
      PetOwnerDtoReponse owner
 ){
 

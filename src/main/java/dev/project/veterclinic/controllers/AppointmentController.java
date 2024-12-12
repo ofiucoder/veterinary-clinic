@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import dev.project.veterclinic.dtos.AppointmentDto;
+import dev.project.veterclinic.dtos.appointmentDtoResponse.AppointDtoRsponse;
 import dev.project.veterclinic.models.Appointment;
 import dev.project.veterclinic.services.AppointmentService;
 
@@ -30,13 +31,13 @@ public class AppointmentController {
 
     // Get all appointments
     @GetMapping("")
-    public List<Appointment> index(){
+    public List<AppointDtoRsponse> index(){
         return service.findAll();
     }
 
     // Create a new appointment
     @PostMapping("")
-    public ResponseEntity<Appointment> store(@Valid @RequestBody AppointmentDto entity) {
+    public ResponseEntity<AppointDtoRsponse> store(@Valid @RequestBody AppointmentDto entity) {
 
         if (entity.date() == null) {
             return ResponseEntity.badRequest().body(null);
@@ -58,12 +59,12 @@ public class AppointmentController {
             return ResponseEntity.badRequest().body(null);
         }
 
-        if (entity.ownerId() <= 0) { 
+        if (entity.ownerDni() <= 0) { 
             return ResponseEntity.badRequest().body(null);
         }
 
         // Proceed to save the appointment
-        Appointment appointment = service.save(entity);
+        AppointDtoRsponse appointment = service.save(entity);
 
         if (appointment == null) {
             return ResponseEntity.noContent().build();
@@ -74,11 +75,9 @@ public class AppointmentController {
 
     // Get appointment by id
     @GetMapping("/{id}")
-    public ResponseEntity<Appointment> show(@PathVariable int id) {
-        Appointment appointment = service.getById(id);
-        if (appointment == null) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<AppointDtoRsponse> show(@PathVariable int id) {
+        AppointDtoRsponse appointment = service.getById(id);
+        
         return ResponseEntity.ok().body(appointment);
     }
     

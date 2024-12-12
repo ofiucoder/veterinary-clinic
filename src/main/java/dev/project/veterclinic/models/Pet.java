@@ -46,7 +46,7 @@ public class Pet {
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
-    @OneToMany(mappedBy="owner")
+    @OneToMany(mappedBy="pet")
     public List<Appointment> appointments;
     
     public Pet() {

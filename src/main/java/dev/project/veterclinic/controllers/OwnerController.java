@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.project.veterclinic.dtos.AppointmentDto;
 import dev.project.veterclinic.dtos.OwnerDto;
+import dev.project.veterclinic.dtos.appointmentDtoResponse.AppointDtoRsponse;
 import dev.project.veterclinic.models.Appointment;
 import dev.project.veterclinic.models.Owner;
 import dev.project.veterclinic.services.AppointmentService;
 import dev.project.veterclinic.services.OwnerService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(path = "${api-endpoint}/owners")
@@ -63,49 +65,70 @@ public class OwnerController {
         Owner owner = ownerService.getById(id);
         return ResponseEntity.ok().body(owner);
     }
-
+    
     // Get all appointments by ownerId, ordered by date
-    @GetMapping("/{ownerId}/appointments")
-    public ResponseEntity<List<Appointment>> showOwnerAppointments(@PathVariable int ownerId) {
-        List<Appointment> appointments = appointmentService.findAppointmentsByOwnerId(ownerId);
+    @GetMapping("/{ownerDni}/appointments")
+    public ResponseEntity<List<AppointDtoRsponse>> showOwnerAppointments(@PathVariable int ownerDni) {
+        return ResponseEntity.ok(appointmentService.findAppointmentsByOwnerId(ownerDni));
+    }
 
-        if (appointments.isEmpty()) {
+    // Create a new appointment
+    @PostMapping("/{ownerDni}/appointments")
+    public ResponseEntity<AppointDtoRsponse> store(@PathVariable int ownerDni, @RequestBody AppointmentDto appointmentDto) {
+
+        if (appointmentDto.date() == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+
+        if (appointmentDto.petId() <= 0) {
+            return ResponseEntity.badRequest().body(null);
+        }
+
+        if (appointmentDto.type() == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+
+        if (appointmentDto.reason() == null || appointmentDto.reason().trim().isEmpty()) {
+            return ResponseEntity.badRequest().body(null);
+        }
+
+        if (appointmentDto.status() == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+        
+        // Proceed to save the appointment
+        AppointDtoRsponse appointment = appointmentService.saveAppointmentByOwnerDni(ownerDni, appointmentDto);
+
+        if (appointment == null) {
             return ResponseEntity.noContent().build();
         }
 
-        return ResponseEntity.ok(appointments);
+        return ResponseEntity.status(201).body(appointment);
     }
-
+    
     // Update an appointment by ownerId and appointmentId
-    @PutMapping("/{ownerId}/appointments/{appointmentId}")
-    public ResponseEntity<Appointment> updateAppointment(
-            @PathVariable int ownerId, 
+    @PutMapping("/{ownerDni}/appointments/{appointmentId}")
+    public ResponseEntity<AppointDtoRsponse> updateAppointment(
+            @PathVariable int ownerDni, 
             @PathVariable int appointmentId,
             @RequestBody AppointmentDto appointmentDto) {
 
         // Validate if the appointment belongs to the ownerId
-        Appointment updatedAppointment = appointmentService.updateAppointment(ownerId, appointmentId, appointmentDto);
+        AppointDtoRsponse updatedAppointment = appointmentService.updateAppointmentByOwnerDniAndAppointmentId(ownerDni, appointmentId, appointmentDto);
 
         return ResponseEntity.ok(updatedAppointment);
     }
 
     // Get a specific appointment for a specific owner
-    @GetMapping("/{ownerId}/appointments/{appointmentId}")
-    public ResponseEntity<Appointment> showOwnerAppointment(@PathVariable int ownerId, @PathVariable int appointmentId) {
-        Optional<Appointment> appointment = appointmentService.findAppointmentByOwnerIdAndAppId(ownerId, appointmentId);
-
-        if (appointment.isEmpty()) {
-            return ResponseEntity.notFound().build();  // Return 404 if the appointment is not found
-        }
-
-        return ResponseEntity.ok(appointment.get());  // Return the appointment if found
+    @GetMapping("/{ownerDni}/appointments/{appointmentId}")
+    public ResponseEntity<AppointDtoRsponse> showOwnerAppointment(@PathVariable int ownerDni, @PathVariable int appointmentId) {
+        AppointDtoRsponse appointment = appointmentService.findAppointmentByOwnerIdAndAppId(ownerDni, appointmentId);
+        return ResponseEntity.ok(appointment);
     }
 
-    // Get a specific appointment for a specific owner
-    @DeleteMapping("/{ownerId}/appointments/{appointmentId}")
-    public ResponseEntity<String> deleteOwnerAppointment(@PathVariable int ownerId, @PathVariable int appointmentId) {
-        appointmentService.deleteById(ownerId, appointmentId);
+    @DeleteMapping("/{ownerDni}/appointments/{appointmentId}")
+    public ResponseEntity<String> deleteOwnerAppointment(@PathVariable int ownerDni, @PathVariable int appointmentId) {
+        appointmentService.deleteAppointmentByOwnerDniAndappointmentId(ownerDni, appointmentId);
         return ResponseEntity.status(200).body("Deleted successfully");
-
     }
 }

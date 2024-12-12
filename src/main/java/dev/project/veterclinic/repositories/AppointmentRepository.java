@@ -12,13 +12,12 @@ import java.util.Optional;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
 
-    // Method to find appointments by ownerId and order them by date
-    List<Appointment> findByOwnerIdOrderByDateAsc(int ownerId);
+    @Query(value = "SELECT * FROM appointments WHERE owner_dni=:ownerDni order by date Asc", nativeQuery = true)
+    List<Appointment> findByOwnerDniOrderByDateAsc(int ownerDni);
 
     // Method to find appointment by ownerId and appointmentId
     Optional<Appointment> findByOwnerIdAndId(int ownerId, int appointmentId);
 
-    @Query(value = "SELECT * FROM appointments WHERE OWNER_IDD=:ownerId AND ID=:appointmentId  LIMIT 1", nativeQuery = true)
-    Appointment findByOwnerIddAndAppointmentId(@Param("ownerId") int ownerId, @Param("appointmentId") int appointmentId);
-    
+    @Query(value = "SELECT * FROM appointments WHERE owner_dni=:ownerDni AND ID=:appointmentId  LIMIT 1", nativeQuery = true)
+    Appointment findByOwnerDniAndAppointmentId(@Param("ownerDni") int ownerDni, @Param("appointmentId") int appointmentId);    
 }

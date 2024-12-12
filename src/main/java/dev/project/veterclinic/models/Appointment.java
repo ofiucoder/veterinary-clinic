@@ -30,8 +30,12 @@ public class Appointment {
     private Pet pet;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "owner_dni", referencedColumnName = "dni")
     private Owner owner;
+
+    public Appointment() {
+    }
+
 
     public Appointment(LocalDateTime date, AppointmentType type, String reason, AppointmentStatus status,
             Pet pet, Owner owner) {
@@ -41,7 +45,7 @@ public class Appointment {
         this.status = status;
         this.pet = pet;
         this.owner = owner;
-    }
+    }   
 
     public Appointment(int id, LocalDateTime date, AppointmentType type, String reason, AppointmentStatus status,
             Pet pet, Owner owner) {
@@ -53,11 +57,6 @@ public class Appointment {
         this.pet = pet;
         this.owner = owner;
     }
-
-    public Appointment() {
-    }
-
-    
 
     public int getId() {
         return id;
