@@ -248,6 +248,11 @@ public class AppointmentService {
           );
     }
 
+
+    public List<Appointment> getAppointmentsByOwnerAndDate(int ownerId, LocalDateTime date) {
+        // Check if an appointment exists with the same owner_id and date
+        return appointmetRepository.findByOwnerDniAndDate(ownerId, date);
+    }
     
     public AppointDtoRsponse updateAppointmentByOwnerDniAndAppointmentId(int ownerDni, int appointmentId, AppointmentDto appointmentDto) {
         //check if the appointment exist
@@ -260,6 +265,8 @@ public class AppointmentService {
         if(pet == null ){
             throw new PetNotFoundException("Pet with the id " + appointmentDto.petId() + " is not of the owner " + ownerDni);
         }
+
+        // Update the appointment fields
         existingAppointment.setDate(appointmentDto.date());
         existingAppointment.setType(appointmentDto.type());
         existingAppointment.setReason(appointmentDto.reason());

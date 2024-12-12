@@ -2,6 +2,7 @@ package dev.project.veterclinic.controllers;
 
 import java.util.List;
 import java.util.Optional;
+import jakarta.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.project.veterclinic.dtos.AppointmentDto;
 import dev.project.veterclinic.dtos.OwnerDto;
 import dev.project.veterclinic.dtos.appointmentDtoResponse.AppointDtoRsponse;
+import dev.project.veterclinic.exceptions.appointment.AppointmentConflictException;
 import dev.project.veterclinic.models.Appointment;
 import dev.project.veterclinic.models.Owner;
 import dev.project.veterclinic.services.AppointmentService;
@@ -50,6 +52,7 @@ public class OwnerController {
         if (entity.phoneNumber() == "" || entity.phoneNumber() == null)
             return ResponseEntity.badRequest().build();
 
+        // Save the owner and get the created owner object
         Owner owner = ownerService.save(entity);
 
         if (owner == null)
@@ -61,7 +64,6 @@ public class OwnerController {
     // get by id
     @GetMapping("/{id}")
     public ResponseEntity<Owner> show(@PathVariable int id) {
-
         Owner owner = ownerService.getById(id);
         return ResponseEntity.ok().body(owner);
     }
@@ -75,25 +77,25 @@ public class OwnerController {
     // Create a new appointment
     @PostMapping("/{ownerDni}/appointments")
     public ResponseEntity<AppointDtoRsponse> store(@PathVariable int ownerDni, @RequestBody AppointmentDto appointmentDto) {
+        // Set the ownerId in the appointmentDto before saving
+        appointmentDto = new AppointmentDto(
+            appointmentDto.date(),
+            appointmentDto.type(),
+            appointmentDto.reason(),
+            appointmentDto.status(),
+            appointmentDto.petId(),
+            ownerDni
+        ); // Set the ownerId from the path
 
-        if (appointmentDto.date() == null) {
+        // Perform validation checks and return bad request if any check fails
+        if (isInvalidAppointment(appointmentDto)) {
             return ResponseEntity.badRequest().body(null);
         }
 
-        if (appointmentDto.petId() <= 0) {
-            return ResponseEntity.badRequest().body(null);
-        }
-
-        if (appointmentDto.type() == null) {
-            return ResponseEntity.badRequest().body(null);
-        }
-
-        if (appointmentDto.reason() == null || appointmentDto.reason().trim().isEmpty()) {
-            return ResponseEntity.badRequest().body(null);
-        }
-
-        if (appointmentDto.status() == null) {
-            return ResponseEntity.badRequest().body(null);
+        // Check for existing appointment with the same owner_id and date
+        if (isDuplicateAppointment(appointmentDto)) {
+            // Throw a custom exception for duplicate appointment
+            throw new AppointmentConflictException("An appointment with the same date and time already exists for owner " + ownerDni);
         }
         
         // Proceed to save the appointment
@@ -105,7 +107,7 @@ public class OwnerController {
 
         return ResponseEntity.status(201).body(appointment);
     }
-    
+
     // Update an appointment by ownerId and appointmentId
     @PutMapping("/{ownerDni}/appointments/{appointmentId}")
     public ResponseEntity<AppointDtoRsponse> updateAppointment(
@@ -130,5 +132,20 @@ public class OwnerController {
     public ResponseEntity<String> deleteOwnerAppointment(@PathVariable int ownerDni, @PathVariable int appointmentId) {
         appointmentService.deleteAppointmentByOwnerDniAndappointmentId(ownerDni, appointmentId);
         return ResponseEntity.status(200).body("Deleted successfully");
+    }
+
+    // Helper method to validate the AppointmentDto
+    private boolean isInvalidAppointment(AppointmentDto entity) {
+        return entity.date() == null ||
+                entity.petId() <= 0 ||
+                entity.type() == null ||
+                entity.reason() == null || entity.reason().trim().isEmpty() ||
+                entity.status() == null;
+    }
+
+    // Helper method to check if there is an existing appointment with the same
+    // owner_id and date
+    private boolean isDuplicateAppointment(AppointmentDto entity) {
+        return appointmentService.getAppointmentsByOwnerAndDate(entity.ownerDni(), entity.date()).size() > 0;
     }
 }
