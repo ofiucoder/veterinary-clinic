@@ -44,15 +44,15 @@ public class PatientService {
         return mapToDto(savedPet);
     }
 
-    public PatientDto update(int id, PatientDto patientDto) {
-        return petRepository.findById(id)
-                .map(existingPet -> {
-                    Pet updatedPet = mapToEntity(patientDto);
-                    updatedPet.setId(id);
-                    return mapToDto(petRepository.save(updatedPet));
-                })
-                .orElse(null);
-    }
+    // public PatientDto update(int id, PatientDto patientDto) {
+    //     return petRepository.findById(id)
+    //             .map(existingPet -> {
+    //                 Pet updatedPet = mapToEntity(patientDto);
+    //                 updatedPet.setId(id);
+    //                 return mapToDto(petRepository.save(updatedPet));
+    //             })
+    //             .orElse(null);
+    // }
 
     public boolean delete(int id) {
         if (petRepository.existsById(id)) {
