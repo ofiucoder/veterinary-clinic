@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import dev.project.veterclinic.dtos.AppointmentDto;
 import dev.project.veterclinic.dtos.appointmentDtoResponse.AppointDtoRsponse;
-import dev.project.veterclinic.models.Appointment;
+import dev.project.veterclinic.exceptions.appointment.AppointmentConflictException;
 import dev.project.veterclinic.services.AppointmentService;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public class AppointmentController {
     
         // Check for existing appointment with the same owner_id and date
         if (isDuplicateAppointment(entity)) {
-            return ResponseEntity.badRequest().body(null);
+            throw new AppointmentConflictException("An appointment with the same date and time already exists for owner " + entity.ownerDni());
         }
 
         if(isInvalidAppointment(entity)){
@@ -77,6 +77,6 @@ public class AppointmentController {
     // Helper method to check if there is an existing appointment with the same owner_id and date
     private boolean isDuplicateAppointment(AppointmentDto entity) {
         // Query the service or repository to check if an appointment with the same owner_id and date exists
-        return service.getAppointmentsByOwnerAndDate(entity.ownerDni(), entity.date()).size() > 0;
+        return service.getAppointmentsByOwnerAndDate(entity.ownerDni(), entity.date()) != null;
     }
 }

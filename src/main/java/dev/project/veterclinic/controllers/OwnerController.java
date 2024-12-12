@@ -1,9 +1,6 @@
 package dev.project.veterclinic.controllers;
 
 import java.util.List;
-import java.util.Optional;
-import jakarta.validation.Valid;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,11 +15,9 @@ import dev.project.veterclinic.dtos.AppointmentDto;
 import dev.project.veterclinic.dtos.OwnerDto;
 import dev.project.veterclinic.dtos.appointmentDtoResponse.AppointDtoRsponse;
 import dev.project.veterclinic.exceptions.appointment.AppointmentConflictException;
-import dev.project.veterclinic.models.Appointment;
 import dev.project.veterclinic.models.Owner;
 import dev.project.veterclinic.services.AppointmentService;
 import dev.project.veterclinic.services.OwnerService;
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(path = "${api-endpoint}/owners")
@@ -146,6 +141,6 @@ public class OwnerController {
     // Helper method to check if there is an existing appointment with the same
     // owner_id and date
     private boolean isDuplicateAppointment(AppointmentDto entity) {
-        return appointmentService.getAppointmentsByOwnerAndDate(entity.ownerDni(), entity.date()).size() > 0;
+        return appointmentService.getAppointmentsByOwnerAndDate(entity.ownerDni(), entity.date()) != null;
     }
 }

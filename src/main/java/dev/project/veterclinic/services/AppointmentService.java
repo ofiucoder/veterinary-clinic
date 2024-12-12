@@ -3,36 +3,28 @@ package dev.project.veterclinic.services;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import dev.project.veterclinic.dtos.AppointmentDto;
 import dev.project.veterclinic.dtos.appointmentDtoResponse.AppointDtoRsponse;
 import dev.project.veterclinic.dtos.petDtoResponse.PetBreedDtoResponse;
 import dev.project.veterclinic.dtos.petDtoResponse.PetDtoResponse;
 import dev.project.veterclinic.dtos.petDtoResponse.PetOwnerDtoReponse;
-import dev.project.veterclinic.enums.PetType;
 import dev.project.veterclinic.exceptions.appointment.AppointmentNotFoundException;
-import dev.project.veterclinic.exceptions.owner.OwnerNotFoundException;
 import dev.project.veterclinic.exceptions.pet.PetNotFoundException;
 import dev.project.veterclinic.models.Appointment;
-import dev.project.veterclinic.models.Breed;
 import dev.project.veterclinic.repositories.AppointmentRepository;
 import dev.project.veterclinic.repositories.OwnerRepository;
 import dev.project.veterclinic.repositories.PetRepository;
-import dev.project.veterclinic.models.Owner;
 import dev.project.veterclinic.models.Pet;
 
 @Service
 public class AppointmentService {
     private final AppointmentRepository appointmetRepository;
     private final PetRepository petRepository;
-    private final OwnerRepository ownerRepository;
-
     public AppointmentService(AppointmentRepository appointmetRepository, PetRepository petRepository, OwnerRepository ownerRepository) {
         this.appointmetRepository = appointmetRepository;
         this.petRepository = petRepository;
-        this.ownerRepository = ownerRepository;
     }
 
     // Fetch all appointments
@@ -249,9 +241,9 @@ public class AppointmentService {
     }
 
 
-    public List<Appointment> getAppointmentsByOwnerAndDate(int ownerId, LocalDateTime date) {
+    public Appointment getAppointmentsByOwnerAndDate(int ownerDni, LocalDateTime date) {
         // Check if an appointment exists with the same owner_id and date
-        return appointmetRepository.findByOwnerDniAndDate(ownerId, date);
+        return appointmetRepository.findByOwnerDniAndDate(ownerDni, date);
     }
     
     public AppointDtoRsponse updateAppointmentByOwnerDniAndAppointmentId(int ownerDni, int appointmentId, AppointmentDto appointmentDto) {
