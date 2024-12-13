@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import dev.project.veterclinic.dtos.AppointmentDto;
-import dev.project.veterclinic.dtos.appointmentDtoResponse.AppointDtoRsponse;
+import dev.project.veterclinic.dtos.appointmentDtoResponse.AppointDtoResponse;
 import dev.project.veterclinic.dtos.petDtoResponse.PetBreedDtoResponse;
 import dev.project.veterclinic.dtos.petDtoResponse.PetDtoResponse;
 import dev.project.veterclinic.dtos.petDtoResponse.PetOwnerDtoReponse;
@@ -27,11 +27,11 @@ public class AppointmentService {
     }
 
     // Fetch all appointments
-    public List<AppointDtoRsponse> findAll() {
+    public List<AppointDtoResponse> findAll() {
         
-        List<AppointDtoRsponse> apptDtoList = new ArrayList<>();
+        List<AppointDtoResponse> apptDtoList = new ArrayList<>();
         for (Appointment appointment : appointmetRepository.findAll()) {
-            apptDtoList.add(new AppointDtoRsponse(
+            apptDtoList.add(new AppointDtoResponse(
                 appointment.getId(),
                 appointment.getDate(),
                 appointment.getType(),
@@ -61,7 +61,7 @@ public class AppointmentService {
     }
 
     // Save a new appointment (creating a new one)
-    public AppointDtoRsponse save(AppointmentDto appointmentDto) {
+    public AppointDtoResponse save(AppointmentDto appointmentDto) {
         Pet pet = petRepository.findByOwnerDniAndPetId(appointmentDto.ownerDni(), appointmentDto.petId());
         if(pet == null ){
             throw new PetNotFoundException("Pet with the id " + appointmentDto.petId() + " is not of the owner " + appointmentDto.ownerDni());
@@ -75,7 +75,7 @@ public class AppointmentService {
                 pet,
                 pet.getOwner());
         appointmetRepository.save(appointment);
-        return new AppointDtoRsponse(
+        return new AppointDtoResponse(
             appointment.getId(),
             appointment.getDate(),
             appointment.getType(),
@@ -102,7 +102,7 @@ public class AppointmentService {
           );
     }
 
-    public AppointDtoRsponse saveAppointmentByOwnerDni(int ownerDni, AppointmentDto appointmentDto) {
+    public AppointDtoResponse saveAppointmentByOwnerDni(int ownerDni, AppointmentDto appointmentDto) {
         Pet pet = petRepository.findByOwnerDniAndPetId(ownerDni, appointmentDto.petId());
         if(pet == null ){
             throw new PetNotFoundException("Pet with the id " + appointmentDto.petId() + " is not of the owner " + ownerDni);
@@ -116,7 +116,7 @@ public class AppointmentService {
                 pet,
                 pet.getOwner());
         appointmetRepository.save(appointment);
-        return new AppointDtoRsponse(
+        return new AppointDtoResponse(
             appointment.getId(),
             appointment.getDate(),
             appointment.getType(),
@@ -143,9 +143,9 @@ public class AppointmentService {
           );
     }
     // Get appointment by id
-    public AppointDtoRsponse getById(int id) {
+    public AppointDtoResponse getById(int id) {
         Appointment appointment = appointmetRepository.findById(id).orElseThrow(() -> new AppointmentNotFoundException("Appointment not found"));
-        return new AppointDtoRsponse(
+        return new AppointDtoResponse(
             appointment.getId(),
             appointment.getDate(),
             appointment.getType(),
@@ -173,11 +173,11 @@ public class AppointmentService {
     }
 
     // Find appointments by ownerId and order by date
-    public List<AppointDtoRsponse> findAppointmentsByOwnerId(int ownerDni) {
+    public List<AppointDtoResponse> findAppointmentsByOwnerId(int ownerDni) {
         
-        List<AppointDtoRsponse> apptDtoList = new ArrayList<>();
+        List<AppointDtoResponse> apptDtoList = new ArrayList<>();
         for (Appointment appointment : appointmetRepository.findByOwnerDniOrderByDateAsc(ownerDni)) {
-            apptDtoList.add(new AppointDtoRsponse(
+            apptDtoList.add(new AppointDtoResponse(
                 appointment.getId(),
                 appointment.getDate(),
                 appointment.getType(),
@@ -207,12 +207,12 @@ public class AppointmentService {
     }
 
     // Find appointment by ownerId and appointmentId
-    public AppointDtoRsponse findAppointmentByOwnerIdAndAppId(int ownerDni, int appointmentId) {
+    public AppointDtoResponse findAppointmentByOwnerIdAndAppId(int ownerDni, int appointmentId) {
         Appointment appointment = appointmetRepository.findByOwnerDniAndAppointmentId(ownerDni, appointmentId);
         if(appointment == null){
             throw new AppointmentNotFoundException("Appointment not found");
         }
-        return new AppointDtoRsponse(
+        return new AppointDtoResponse(
             appointment.getId(),
             appointment.getDate(),
             appointment.getType(),
@@ -245,7 +245,7 @@ public class AppointmentService {
         return appointmetRepository.findByOwnerDniAndDate(ownerDni, date);
     }
     
-    public AppointDtoRsponse updateAppointmentByOwnerDniAndAppointmentId(int ownerDni, int appointmentId, AppointmentDto appointmentDto) {
+    public AppointDtoResponse updateAppointmentByOwnerDniAndAppointmentId(int ownerDni, int appointmentId, AppointmentDto appointmentDto) {
         //check if the appointment exist
         Appointment existingAppointment = appointmetRepository.findByOwnerDniAndAppointmentId(ownerDni, appointmentId);
         if(existingAppointment == null){
@@ -265,7 +265,7 @@ public class AppointmentService {
         existingAppointment.setPet(pet);
         appointmetRepository.save(existingAppointment);
 
-        return new AppointDtoRsponse(
+        return new AppointDtoResponse(
                                   existingAppointment.getId(),
                                   existingAppointment.getDate(),
                                   existingAppointment.getType(),
