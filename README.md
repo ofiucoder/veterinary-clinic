@@ -184,7 +184,7 @@ Include diagrams such as:
 
 **Abdias Labrador** [GitHub](https://github.com/abdiaslabrador) / [LinkedIn](https://www.linkedin.com/in/abdias-labrador/)
 
-**Alberto Casas** [GitHub](https://github.com/ofiucoder) / [LinkedIn]()
+**Alberto Casas** [GitHub](https://github.com/ofiucoder) / [LinkedIn](https://www.linkedin.com/in/jhon-alberto-casas-gutierrez-29590161/)
 
 **Andreina Arias** [GitHub](https://github.com/Andreina2) / [LinkedIn](https://www.linkedin.com/in/andreina-arias/)
 
