@@ -162,7 +162,7 @@ To run the tests, use the following Maven command:
 
 ### Test Coverage
 
-<img src="screenshot/" alt="Test Coverage" width="40%">
+<img src="screenshot/test_cover.png" alt="Test Coverage" width="35%">
 
 ## Diagrams
 Include diagrams such as:
@@ -184,7 +184,7 @@ Include diagrams such as:
 
 **Abdias Labrador** [GitHub](https://github.com/abdiaslabrador) / [LinkedIn](https://www.linkedin.com/in/abdias-labrador/)
 
-**Alberto Casas** [GitHub](https://github.com/ofiucoder) / [LinkedIn]()
+**Alberto Casas** [GitHub](https://github.com/ofiucoder) / [LinkedIn](https://www.linkedin.com/in/jhon-alberto-casas-gutierrez-29590161/)
 
 **Andreina Arias** [GitHub](https://github.com/Andreina2) / [LinkedIn](https://www.linkedin.com/in/andreina-arias/)
 
