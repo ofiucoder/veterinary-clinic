@@ -162,7 +162,7 @@ To run the tests, use the following Maven command:
 
 ### Test Coverage
 
-<img src="screenshot/" alt="Test Coverage" width="40%">
+<img src="screenshot/test_cover.png" alt="Test Coverage" width="35%">
 
 ## Diagrams
 Include diagrams such as:

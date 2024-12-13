@@ -1,6 +1,5 @@
 package dev.project.veterclinic.services;
 
-import dev.project.veterclinic.dtos.AppointmentDto;
 import dev.project.veterclinic.models.Appointment;
 import dev.project.veterclinic.models.Pet;
 import dev.project.veterclinic.repositories.AppointmentRepository;
@@ -36,7 +35,6 @@ public class AppointmentServiceTest {
     private Pet mockPet;
     private Owner mockOwner;
     private Appointment mockAppointment;
-    private AppointmentDto mockAppointmentDto;
 
     @BeforeEach
     void setUp() {
@@ -48,9 +46,6 @@ public class AppointmentServiceTest {
 
         // Create a mock Appointment
         mockAppointment = new Appointment(LocalDateTime.now(), AppointmentType.ORDINARY, "Checkup", AppointmentStatus.PENDING, mockPet, mockOwner);
-
-        // Create a mock AppointmentDto
-        mockAppointmentDto = new AppointmentDto(LocalDateTime.now(), AppointmentType.ORDINARY, "Checkup", AppointmentStatus.PENDING, 1, 12345);
     }
 
     @Test
