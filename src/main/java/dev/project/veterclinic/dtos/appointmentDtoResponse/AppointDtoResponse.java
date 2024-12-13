@@ -6,7 +6,7 @@ import dev.project.veterclinic.dtos.petDtoResponse.PetDtoResponse;
 import dev.project.veterclinic.enums.AppointmentStatus;
 import dev.project.veterclinic.enums.AppointmentType;
 
-public record AppointDtoRsponse (
+public record AppointDtoResponse (
     int id,
     LocalDateTime date,
     AppointmentType type,

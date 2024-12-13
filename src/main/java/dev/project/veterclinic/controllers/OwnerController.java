@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.project.veterclinic.dtos.AppointmentDto;
 import dev.project.veterclinic.dtos.OwnerDto;
-import dev.project.veterclinic.dtos.appointmentDtoResponse.AppointDtoRsponse;
+import dev.project.veterclinic.dtos.appointmentDtoResponse.AppointDtoResponse;
 import dev.project.veterclinic.exceptions.appointment.AppointmentConflictException;
 import dev.project.veterclinic.models.Owner;
 import dev.project.veterclinic.services.AppointmentService;
@@ -65,13 +65,13 @@ public class OwnerController {
     
     // Get all appointments by ownerId, ordered by date
     @GetMapping("/{ownerDni}/appointments")
-    public ResponseEntity<List<AppointDtoRsponse>> showOwnerAppointments(@PathVariable int ownerDni) {
+    public ResponseEntity<List<AppointDtoResponse>> showOwnerAppointments(@PathVariable int ownerDni) {
         return ResponseEntity.ok(appointmentService.findAppointmentsByOwnerId(ownerDni));
     }
 
     // Create a new appointment
     @PostMapping("/{ownerDni}/appointments")
-    public ResponseEntity<AppointDtoRsponse> store(@PathVariable int ownerDni, @RequestBody AppointmentDto appointmentDto) {
+    public ResponseEntity<AppointDtoResponse> store(@PathVariable int ownerDni, @RequestBody AppointmentDto appointmentDto) {
         // Set the ownerId in the appointmentDto before saving
         appointmentDto = new AppointmentDto(
             appointmentDto.date(),
@@ -94,7 +94,7 @@ public class OwnerController {
         }
         
         // Proceed to save the appointment
-        AppointDtoRsponse appointment = appointmentService.saveAppointmentByOwnerDni(ownerDni, appointmentDto);
+        AppointDtoResponse appointment = appointmentService.saveAppointmentByOwnerDni(ownerDni, appointmentDto);
 
         if (appointment == null) {
             return ResponseEntity.noContent().build();
@@ -105,21 +105,21 @@ public class OwnerController {
 
     // Update an appointment by ownerId and appointmentId
     @PutMapping("/{ownerDni}/appointments/{appointmentId}")
-    public ResponseEntity<AppointDtoRsponse> updateAppointment(
+    public ResponseEntity<AppointDtoResponse> updateAppointment(
             @PathVariable int ownerDni, 
             @PathVariable int appointmentId,
             @RequestBody AppointmentDto appointmentDto) {
 
         // Validate if the appointment belongs to the ownerId
-        AppointDtoRsponse updatedAppointment = appointmentService.updateAppointmentByOwnerDniAndAppointmentId(ownerDni, appointmentId, appointmentDto);
+        AppointDtoResponse updatedAppointment = appointmentService.updateAppointmentByOwnerDniAndAppointmentId(ownerDni, appointmentId, appointmentDto);
 
         return ResponseEntity.ok(updatedAppointment);
     }
 
     // Get a specific appointment for a specific owner
     @GetMapping("/{ownerDni}/appointments/{appointmentId}")
-    public ResponseEntity<AppointDtoRsponse> showOwnerAppointment(@PathVariable int ownerDni, @PathVariable int appointmentId) {
-        AppointDtoRsponse appointment = appointmentService.findAppointmentByOwnerIdAndAppId(ownerDni, appointmentId);
+    public ResponseEntity<AppointDtoResponse> showOwnerAppointment(@PathVariable int ownerDni, @PathVariable int appointmentId) {
+        AppointDtoResponse appointment = appointmentService.findAppointmentByOwnerIdAndAppId(ownerDni, appointmentId);
         return ResponseEntity.ok(appointment);
     }
 

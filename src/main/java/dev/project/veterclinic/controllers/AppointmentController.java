@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import dev.project.veterclinic.dtos.AppointmentDto;
-import dev.project.veterclinic.dtos.appointmentDtoResponse.AppointDtoRsponse;
+import dev.project.veterclinic.dtos.appointmentDtoResponse.AppointDtoResponse;
 import dev.project.veterclinic.exceptions.appointment.AppointmentConflictException;
 import dev.project.veterclinic.services.AppointmentService;
 
@@ -28,13 +28,13 @@ public class AppointmentController {
 
     // Get all appointments
     @GetMapping("")
-    public List<AppointDtoRsponse> index(){
+    public List<AppointDtoResponse> index(){
         return service.findAll();
     }
 
     // Create a new appointment
     @PostMapping("")
-    public ResponseEntity<AppointDtoRsponse> store(@Valid @RequestBody AppointmentDto entity) {
+    public ResponseEntity<AppointDtoResponse> store(@Valid @RequestBody AppointmentDto entity) {
 
         if (entity.date() == null) {
             return ResponseEntity.badRequest().body(null);
@@ -50,7 +50,7 @@ public class AppointmentController {
         }
 
         // Proceed to save the appointment
-        AppointDtoRsponse appointment = service.save(entity);
+        AppointDtoResponse appointment = service.save(entity);
     
         // Return the created appointment with status 201
         return ResponseEntity.status(201).body(appointment);
@@ -58,8 +58,8 @@ public class AppointmentController {
 
     // Get appointment by id
     @GetMapping("/{id}")
-    public ResponseEntity<AppointDtoRsponse> show(@PathVariable int id) {
-        AppointDtoRsponse appointment = service.getById(id);
+    public ResponseEntity<AppointDtoResponse> show(@PathVariable int id) {
+        AppointDtoResponse appointment = service.getById(id);
         
         return ResponseEntity.ok().body(appointment);
     }
