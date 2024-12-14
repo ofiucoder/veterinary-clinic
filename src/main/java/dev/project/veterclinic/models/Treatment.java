@@ -1,8 +1,6 @@
 package dev.project.veterclinic.models;
 
 import java.time.LocalDateTime;
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

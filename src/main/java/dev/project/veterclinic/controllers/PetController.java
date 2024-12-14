@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.project.veterclinic.dtos.PetDto;
 import dev.project.veterclinic.dtos.PetProfileDto;
 import dev.project.veterclinic.dtos.petDtoResponse.PetDtoResponse;
-import dev.project.veterclinic.models.Pet;
 import dev.project.veterclinic.services.PetService;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
