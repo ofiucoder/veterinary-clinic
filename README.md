@@ -14,7 +14,7 @@ This project aims to develop a patient management system for a veterinary clinic
 ## Functional Requirements
 
 ### Patient Management
-- **List, add, modify, and delete patients**.
+- List, add, modify, and delete patients.
 - Each patient must have a **profile** with:
     - Name
     - Age
@@ -147,11 +147,6 @@ To run the tests, use the following Maven command:
 
     mvn test
 
-### Tests Included
-
-- **Valid DNI tests**: Validates correct DNI numbers and calculates the corresponding letter.
-- **Invalid DNI tests**: Tests cases for invalid inputs (less than 8 digits, more than 8 digits, or non-numeric characters).
-- **Main method tests**: Simulates input and captures output to verify the program prints the correct messages for both valid and invalid inputs.
 
 ### Test Coverage
 
