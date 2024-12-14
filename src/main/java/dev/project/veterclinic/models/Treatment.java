@@ -1,7 +1,6 @@
 package dev.project.veterclinic.models;
 
-import java.time.LocalDate;
-
+import java.time.LocalDateTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,6 +8,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,7 +22,7 @@ public class Treatment {
     private int id;
 
     @Column(name = "date")
-    private LocalDate date;
+    private LocalDateTime date;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
@@ -30,6 +31,18 @@ public class Treatment {
     @Column(name = "note")
     private String note;
 
+    @ManyToOne()
+    @JoinColumn(name = "pet_id")
+    private Pet pet;
+
+    public Pet getPet() {
+        return pet;
+    }
+
+    public void setPet(Pet pet) {
+        this.pet = pet;
+    }
+
     public enum TreatmentType {
         MEDICATION, THERAPY, SURGERY, CHECKUP, OTHERS
     }
@@ -37,7 +50,7 @@ public class Treatment {
     public Treatment() {
     }
 
-    public Treatment(int id, LocalDate date, TreatmentType type, String note) {
+    public Treatment(int id, LocalDateTime date, TreatmentType type, String note) {
         this.id = id;
         this.date = date;
         this.type = type;
@@ -53,11 +66,11 @@ public class Treatment {
         this.id = id;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

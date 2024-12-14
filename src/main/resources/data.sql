@@ -128,3 +128,14 @@ VALUES (default, '2020-12-10 09:00:00', 10, 'ORDINARY', 'nutrition advice', 'PEN
 
 INSERT INTO appointments (id, date, pet_id, type, reason, status, owner_dni) 
 VALUES (default, '2020-03-15 09:30:00', 1, 'URGENT', 'bleeding', 'PASSED', '12345678');
+
+
+-- Inserción de tratamientos para algunas mascotas
+INSERT INTO TREATMENTS (date, type, note, pet_id)
+VALUES
+  ('2024-01-15', 'CHECKUP', 'Revisión rutinaria', 1), -- Whiskers
+  ('2024-02-14', 'CHECKUP', 'Revisión rutinaria', 1), -- Whiskers
+  ('2024-02-20', 'MEDICATION', 'Tratamiento para alergia', 3), -- Max
+  ('2024-03-10', 'THERAPY', 'Terapia física post-lesión', 4), -- Bella
+  ('2024-04-01', 'SURGERY', 'Cirugía de esterilización', 6), -- Chloe
+  ('2024-05-05', 'OTHERS', 'Vacunación anual', 10); -- Lily

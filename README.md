@@ -112,10 +112,8 @@ This project is organized using **Spring Boot** to create a REST API. Below are 
 
 #### Owner
 - **GET /owners**: List all owners.
-- **POST /owners**: Create a new owner.
 - **GET /owners/{id}**: Get an owner by ID.
-- **PUT /owners/{id}**: Update an owner data by ID
-- **DELETE /owners/{id}**: Delete an owner data by ID
+- **POST /owners**: Create a new owner.
 
 #### Pet
 - **GET /pets**: List all pets.

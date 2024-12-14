@@ -2,10 +2,11 @@ package dev.project.veterclinic.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.stereotype.Service;
 import dev.project.veterclinic.exceptions.owner.OwnerNotFoundException;
 import dev.project.veterclinic.dtos.PetDto;
+import dev.project.veterclinic.dtos.PetProfileDto;
+import dev.project.veterclinic.dtos.TreatmentDto;
 import dev.project.veterclinic.dtos.petDtoResponse.PetBreedDtoResponse;
 import dev.project.veterclinic.dtos.petDtoResponse.PetDtoResponse;
 import dev.project.veterclinic.dtos.petDtoResponse.PetOwnerDtoReponse;
@@ -13,20 +14,24 @@ import dev.project.veterclinic.exceptions.pet.PetNotFoundException;
 import dev.project.veterclinic.models.Breed;
 import dev.project.veterclinic.models.Owner;
 import dev.project.veterclinic.models.Pet;
+import dev.project.veterclinic.models.Treatment;
 import dev.project.veterclinic.repositories.BreedRepository;
 import dev.project.veterclinic.repositories.OwnerRepository;
 import dev.project.veterclinic.repositories.PetRepository;
+import dev.project.veterclinic.repositories.TreatmentRepository;
 
 @Service
 public class PetService {
     private PetRepository petRepository;
     private OwnerRepository ownerRepository;
     private BreedRepository breedRepository;
+    private TreatmentRepository treatmentRepository;
 
-    public PetService(PetRepository petRepository, OwnerRepository ownerRepository, BreedRepository breedRepository){
+    public PetService(PetRepository petRepository, OwnerRepository ownerRepository, BreedRepository breedRepository, TreatmentRepository treatmentRepository){
         this.petRepository = petRepository;
         this.ownerRepository =  ownerRepository;
         this.breedRepository = breedRepository;
+        this.treatmentRepository = treatmentRepository;
     }
 
     public List<PetDtoResponse> findAll(){
@@ -97,9 +102,38 @@ public class PetService {
 
     }
 
-    public Pet getById(int id){
+    
+    public PetProfileDto getPetProfile(int id){
         Pet pet = petRepository.findById(id).orElseThrow(()-> new PetNotFoundException("Pet not found by id"));
-        return pet;
+        List<TreatmentDto> treatmentDtoList = new ArrayList<>();
+        for (Treatment treatment : treatmentRepository.findByPetId(id)) {
+            treatmentDtoList.add(new TreatmentDto(
+                treatment.getId(),
+                treatment.getDate(),
+                treatment.getType(),
+                treatment.getNote()
+            ));
+        }
+
+        return new PetProfileDto(
+                                    pet.getId(),
+                                    pet.getName(),
+                                    pet.getDateOfBirth(),
+                                    pet.getGender(),
+                                    pet.getPetType(),
+                                    new  PetBreedDtoResponse(
+                                        pet.getBreed().getId(),
+                                        pet.getBreed().getBreedName()
+                                    ),
+                                    new  PetOwnerDtoReponse(
+                                        pet.getOwner().getId(),
+                                        pet.getOwner().getFirstName(),
+                                        pet.getOwner().getLastName(),
+                                        pet.getOwner().getDni(),
+                                        pet.getOwner().getPhoneNumber()
+                                    ),
+                                    treatmentDtoList
+                                );
     }
 
     public void deleletById(int id){
@@ -108,23 +142,43 @@ public class PetService {
         
     }
 
-    public Pet updateById (int id, Pet updatePet) {
-        Optional<Pet> existingPet= petRepository.findById(id); // Optional maneja valores que pueden o no estar presentes, icluye el metodo isPresent
-        if (existingPet.isPresent()) {
-            Pet pet = existingPet.get();
-            pet.setName(updatePet.getName());
-            pet.setDateOfBirth(updatePet.getDateOfBirth());
-//            pet.setBread_id(updatePet.getBread_id());
-            pet.setGender(updatePet.getGender());
-//            pet.setOwner_id(updatePet.getOwnerId());
+    public PetDtoResponse updateById(int id, PetDto updatePet) {
+        Pet pet = petRepository.findById(id).orElseThrow(()-> new PetNotFoundException("Pet not found by id"));
+        Breed breed;
 
-            return petRepository.save(pet);
-
+        if(!breedRepository.existByNameLowerCase(updatePet.breed())){
+            breed = new Breed(updatePet.breed());
+            breedRepository.save(breed);
+        }else{
+            breed = breedRepository.findByName(updatePet.breed());
         }
+            pet.setName(updatePet.name());
+            pet.setDateOfBirth(updatePet.dateOfBirth());
+            pet.setGender(updatePet.gender());
+            pet.setPetType(updatePet.petType());
+            pet.setBreed(breed);
 
-        else {
-            throw new RuntimeException ("Pet not found with ID" + id);
-        }
+            petRepository.save(pet);
+            return new PetDtoResponse(
+                pet.getId(),
+                pet.getName(),
+                pet.getDateOfBirth(),
+                pet.getGender(),
+                pet.getPetType(),
+                new  PetBreedDtoResponse(
+                   pet.getBreed().getId(),
+                   pet.getBreed().getBreedName()
+                ),
+                new  PetOwnerDtoReponse(
+                   pet.getOwner().getId(),
+                   pet.getOwner().getFirstName(),
+                   pet.getOwner().getLastName(),
+                   pet.getOwner().getDni(),
+                   pet.getOwner().getPhoneNumber()
+                )
+           );
+
+        
     }
         
 }
