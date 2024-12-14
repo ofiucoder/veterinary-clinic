@@ -51,6 +51,9 @@ public class Pet {
     @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Appointment> appointments;
 
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<Treatment> treatments;
+
     public Pet() {
 
     }

@@ -2,16 +2,16 @@ package dev.project.veterclinic.models;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class TreatmentTest {
 
     @Test
     void testDate() {
         Treatment treatment = new Treatment();
-        LocalDate date = LocalDate.of(2023, 1, 1);
+        LocalDateTime date = LocalDateTime.of(2023, 1, 1, 0, 0);
         treatment.setDate(date);
-        assertEquals(date, treatment.getDate());
+        assertEquals(date, treatment.getDate(), "Las fechas no son iguales");
     }
 
     @Test

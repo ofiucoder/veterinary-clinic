@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.project.veterclinic.dtos.PetDto;
+import dev.project.veterclinic.dtos.PetProfileDto;
 import dev.project.veterclinic.dtos.petDtoResponse.PetDtoResponse;
 import dev.project.veterclinic.models.Pet;
 import dev.project.veterclinic.services.PetService;
@@ -39,6 +40,12 @@ public class PetController {
         return ResponseEntity.status(201).body(pet);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<PetProfileDto> getPetProfile(@PathVariable int id){
+        PetProfileDto petProfile = service.getPetProfile(id);
+        return ResponseEntity.status(200).body(petProfile);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePet(@PathVariable int id){
         service.deleletById(id);
@@ -46,13 +53,8 @@ public class PetController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Pet> updatePet(@PathVariable int id, @RequestBody Pet updatePet) {
-        try {Pet pet = service.updateById(id, updatePet);
-        
-        return ResponseEntity.ok(pet);
-    } catch (RuntimeException e) {
-
-        return ResponseEntity.status(404).body(null); //return 404 if is not found
-        }
+    public ResponseEntity<PetDtoResponse> updatePet(@PathVariable int id, @RequestBody PetDto updatePet) {
+        PetDtoResponse pet = service.updateById(id, updatePet);
+        return ResponseEntity.status(404).body(pet);
     }
 }
