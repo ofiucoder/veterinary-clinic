@@ -14,7 +14,6 @@ import dev.project.veterclinic.exceptions.appointment.AppointmentConflictExcepti
 import dev.project.veterclinic.services.AppointmentService;
 
 import java.util.List;
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(path = "${api-endpoint}/appointments")
@@ -34,7 +33,7 @@ public class AppointmentController {
 
     // Create a new appointment
     @PostMapping("")
-    public ResponseEntity<AppointDtoResponse> store(@Valid @RequestBody AppointmentDto entity) {
+    public ResponseEntity<AppointDtoResponse> store(@RequestBody AppointmentDto entity) {
 
         if (entity.date() == null) {
             return ResponseEntity.badRequest().body(null);

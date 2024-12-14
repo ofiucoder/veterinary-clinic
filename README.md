@@ -27,7 +27,7 @@ This project aims to develop a patient management system for a veterinary clinic
 - The API must record and provide **treatments performed** for each patient.
 
 ### Appointment Management
-- **List, add, modify, and delete appointments**.
+- List, add, modify, and delete appointments.
 - Each appointment must include:
     - Date and time
     - Patient
@@ -35,11 +35,6 @@ This project aims to develop a patient management system for a veterinary clinic
     - Appointment reason
     - Appointment status (pending, passed)
 
-### Extra Features
-- **Add an image to each patient's profile** (using Firebase Storage).
-- **User registration**.
-- **DTOs** for data transfer.
-- **Dockerize** the project.
 
 ## Technical Requirements
 
@@ -117,10 +112,8 @@ This project is organized using **Spring Boot** to create a REST API. Below are 
 
 #### Owner
 - **GET /owners**: List all owners.
-- **POST /owners**: Create a new owner.
 - **GET /owners/{id}**: Get an owner by ID.
-- **PUT /owners/{id}**: Update an owner data by ID
-- **DELETE /owners/{id}**: Delete an owner data by ID
+- **POST /owners**: Create a new owner.
 
 #### Pet
 - **GET /pets**: List all pets.
