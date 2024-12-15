@@ -44,9 +44,9 @@ public class AppointmentControllerTest {
     private AppointmentController appointmentController;
 
     private MockMvc mockMvc;
+    private Appointment appointment;
     private AppointmentDto appointmentDto;
     private AppointDtoResponse appointDtoRespon;
-    private Appointment appointment;
     private List<AppointDtoResponse> appointments;
 
     private ObjectMapper mapper;

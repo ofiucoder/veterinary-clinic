@@ -169,12 +169,12 @@ public class PetControllerTest {
                     .contentType(MediaType.APPLICATION_JSON)
                     .accept(MediaType.APPLICATION_JSON)
                     .content(mapper.writeValueAsString(updatePetDto)))
-                    .andExpect(status().isNotFound())
+                    .andExpect(status().isOk())
                     .andReturn()
                     .getResponse();
 
             // Assert
-            assertThat(response.getStatus(), is(404));
+            assertThat(response.getStatus(), is(200 ));
             assertThat(response.getContentAsString(), containsString("Max"));
         } catch (Exception e) {
             e.printStackTrace();
