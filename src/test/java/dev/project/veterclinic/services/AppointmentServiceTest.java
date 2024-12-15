@@ -50,7 +50,7 @@ public class AppointmentServiceTest {
 
     @Test
     void testDeleteAppointmentByOwnerDniAndappointmentId() {
-        int ownerDni = 12345;
+        String ownerDni = "12345";
         int appointmentId = 1;
         when(appointmentRepository.findByOwnerDniAndAppointmentId(ownerDni, appointmentId)).thenReturn(mockAppointment);
 

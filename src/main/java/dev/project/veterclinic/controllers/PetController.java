@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping(path = "${api-endpoint}/pets")
+@RequestMapping(path = "api/v1/pets")
 public class PetController {
 
     private PetService service;

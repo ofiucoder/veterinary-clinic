@@ -15,5 +15,5 @@ public interface PetRepository extends JpaRepository<Pet, Integer>{
                     AND pets.id=:petId LIMIT 1
                 """
             , nativeQuery = true)
-    Pet findByOwnerDniAndPetId(@Param("ownerDni") int ownerDni, @Param("petId") int petId);    
+    Pet findByOwnerDniAndPetId(@Param("ownerDni") String ownerDni, @Param("petId") int petId);    
 }
