@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping(path = "${api-endpoint}/pets")
+@RequestMapping(path = "api/v1/pets")
 public class PetController {
 
     private PetService service;
@@ -54,6 +54,6 @@ public class PetController {
     @PutMapping("/{id}")
     public ResponseEntity<PetDtoResponse> updatePet(@PathVariable int id, @RequestBody PetDto updatePet) {
         PetDtoResponse pet = service.updateById(id, updatePet);
-        return ResponseEntity.status(404).body(pet);
+        return ResponseEntity.status(200 ).body(pet);
     }
 }

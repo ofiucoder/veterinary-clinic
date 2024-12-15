@@ -18,7 +18,7 @@ public class AppointmentDtoTest {
         String reason = "Routine checkup";
         AppointmentStatus status = AppointmentStatus.PENDING;
         int petId = 1;
-        int ownerDni = 12345678;
+        String ownerDni = "12345678";
 
         // Act
         AppointmentDto appointmentDto = new AppointmentDto(date, type, reason, status, petId, ownerDni);
@@ -40,7 +40,7 @@ public class AppointmentDtoTest {
         String reason = "Routine checkup";
         AppointmentStatus status = AppointmentStatus.PENDING;
         int petId = 1;
-        int ownerDni = 12345678;
+        String ownerDni = "12345678";
 
         // Act
         AppointmentDto appointmentDto1 = new AppointmentDto(date, type, reason, status, petId, ownerDni);
@@ -59,7 +59,7 @@ public class AppointmentDtoTest {
         String reason = "Routine checkup";
         AppointmentStatus status = AppointmentStatus.PENDING;
         int petId = 1;
-        int ownerDni = 12345678;
+        String ownerDni = "12345678";
 
         // Act
         AppointmentDto appointmentDto = new AppointmentDto(date, type, reason, status, petId, ownerDni);

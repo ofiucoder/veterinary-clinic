@@ -1,9 +1,11 @@
 package dev.project.veterclinic.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import dev.project.veterclinic.dtos.OwnerDto;
+import dev.project.veterclinic.dtos.petDtoResponse.PetOwnerDtoReponse;
 import dev.project.veterclinic.exceptions.owner.OwnerNotFoundException;
 import dev.project.veterclinic.models.Owner;
 import dev.project.veterclinic.repositories.OwnerRepository;
@@ -16,18 +18,45 @@ public class OwnerService {
         this.repository = repository;
     }
 
-    public List<Owner> findAll(){
-        return repository.findAll();
+    public List<PetOwnerDtoReponse> findAll(){
+        List<PetOwnerDtoReponse> OwnerDtoList = new ArrayList<>();
+        for (Owner owner : repository.findAll()) {
+            OwnerDtoList.add(
+                                    new  PetOwnerDtoReponse(
+                                    owner.getId(),
+                                    owner.getFirstName(),
+                                    owner.getLastName(),
+                                    owner.getDni(),
+                                    owner.getPhoneNumber()
+                                )
+                            );
+        }
+        return OwnerDtoList;
     }
 
-    public Owner save(OwnerDto ownerDto) {
+    public PetOwnerDtoReponse save(OwnerDto ownerDto) {
+        if(repository.existByDni(ownerDto.dni())){
+            throw  new OwnerNotFoundException("Owner already exist");
+        }
         Owner owner = new Owner(ownerDto.firstName(),  ownerDto.lastName(),  ownerDto.dni(),  ownerDto.phoneNumber());
         repository.save(owner);
-        return owner;
+        return new  PetOwnerDtoReponse(
+            owner.getId(),
+            owner.getFirstName(),
+            owner.getLastName(),
+            owner.getDni(),
+            owner.getPhoneNumber()
+        );
     }
 
-    public Owner getById(int id) {
+    public PetOwnerDtoReponse getById(int id) {
         Owner owner = repository.findById(id).orElseThrow(()-> new OwnerNotFoundException("Owner not found by id"));
-        return owner;
+        return new  PetOwnerDtoReponse(
+                owner.getId(),
+                owner.getFirstName(),
+                owner.getLastName(),
+                owner.getDni(),
+                owner.getPhoneNumber()
+            );
     }
 }

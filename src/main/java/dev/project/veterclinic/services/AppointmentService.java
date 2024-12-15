@@ -102,7 +102,7 @@ public class AppointmentService {
           );
     }
 
-    public AppointDtoResponse saveAppointmentByOwnerDni(int ownerDni, AppointmentDto appointmentDto) {
+    public AppointDtoResponse saveAppointmentByOwnerDni(String ownerDni, AppointmentDto appointmentDto) {
         Pet pet = petRepository.findByOwnerDniAndPetId(ownerDni, appointmentDto.petId());
         if(pet == null ){
             throw new PetNotFoundException("Pet with the id " + appointmentDto.petId() + " is not of the owner " + ownerDni);
@@ -173,7 +173,7 @@ public class AppointmentService {
     }
 
     // Find appointments by ownerId and order by date
-    public List<AppointDtoResponse> findAppointmentsByOwnerId(int ownerDni) {
+    public List<AppointDtoResponse> findAppointmentsByOwnerId(String ownerDni) {
         
         List<AppointDtoResponse> apptDtoList = new ArrayList<>();
         for (Appointment appointment : appointmetRepository.findByOwnerDniOrderByDateAsc(ownerDni)) {
@@ -207,7 +207,7 @@ public class AppointmentService {
     }
 
     // Find appointment by ownerId and appointmentId
-    public AppointDtoResponse findAppointmentByOwnerIdAndAppId(int ownerDni, int appointmentId) {
+    public AppointDtoResponse findAppointmentByOwnerIdAndAppId(String ownerDni, int appointmentId) {
         Appointment appointment = appointmetRepository.findByOwnerDniAndAppointmentId(ownerDni, appointmentId);
         if(appointment == null){
             throw new AppointmentNotFoundException("Appointment not found");
@@ -240,12 +240,12 @@ public class AppointmentService {
     }
 
 
-    public Appointment getAppointmentsByOwnerAndDate(int ownerDni, LocalDateTime date) {
+    public Appointment getAppointmentsByOwnerAndDate(String ownerDni, LocalDateTime date) {
         // Check if an appointment exists with the same owner_id and date
         return appointmetRepository.findByOwnerDniAndDate(ownerDni, date);
     }
     
-    public AppointDtoResponse updateAppointmentByOwnerDniAndAppointmentId(int ownerDni, int appointmentId, AppointmentDto appointmentDto) {
+    public AppointDtoResponse updateAppointmentByOwnerDniAndAppointmentId(String ownerDni, int appointmentId, AppointmentDto appointmentDto) {
         //check if the appointment exist
         Appointment existingAppointment = appointmetRepository.findByOwnerDniAndAppointmentId(ownerDni, appointmentId);
         if(existingAppointment == null){
@@ -292,7 +292,7 @@ public class AppointmentService {
                                 );
     }
 
-    public void deleteAppointmentByOwnerDniAndappointmentId(int ownerDni, int appointmentId) {
+    public void deleteAppointmentByOwnerDniAndappointmentId(String ownerDni, int appointmentId) {
         Appointment existingAppointment = appointmetRepository.findByOwnerDniAndAppointmentId(ownerDni, appointmentId);
         if(existingAppointment == null){
             throw new AppointmentNotFoundException("Appointment not found");

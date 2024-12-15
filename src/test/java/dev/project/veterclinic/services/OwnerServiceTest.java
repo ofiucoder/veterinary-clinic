@@ -1,6 +1,7 @@
 package dev.project.veterclinic.services;
 
 import dev.project.veterclinic.dtos.OwnerDto;
+import dev.project.veterclinic.dtos.petDtoResponse.PetOwnerDtoReponse;
 import dev.project.veterclinic.models.Owner;
 import dev.project.veterclinic.repositories.OwnerRepository;
 import dev.project.veterclinic.exceptions.owner.OwnerNotFoundException;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,12 +43,12 @@ public class OwnerServiceTest {
         when(ownerRepository.findAll()).thenReturn(List.of(mockOwner));
 
         // Act
-        List<Owner> owners = ownerService.findAll();
+        List<PetOwnerDtoReponse> owners = ownerService.findAll();
 
         // Assert
         assertNotNull(owners);
         assertEquals(1, owners.size());  // There should be 1 owner
-        assertEquals("John", owners.get(0).getFirstName());  // Check if the first name matches
+        assertEquals("John", owners.get(0).firstName());  // Check if the first name matches
     }
 
     @Test
@@ -56,11 +58,11 @@ public class OwnerServiceTest {
         when(ownerRepository.findById(ownerId)).thenReturn(Optional.of(mockOwner));
 
         // Act
-        Owner owner = ownerService.getById(ownerId);
+        PetOwnerDtoReponse owner = ownerService.getById(ownerId);
 
         // Assert
         assertNotNull(owner);
-        assertEquals("John", owner.getFirstName());  // Check the owner's first name
+        assertEquals("John", owner.firstName());  // Check the owner's first name
     }
 
     @Test
@@ -79,10 +81,10 @@ public class OwnerServiceTest {
         when(ownerRepository.save(any(Owner.class))).thenReturn(mockOwner);
 
         // Act
-        Owner savedOwner = ownerService.save(mockOwnerDto);
+        PetOwnerDtoReponse savedOwner = ownerService.save(mockOwnerDto);
 
         // Assert
         assertNotNull(savedOwner);
-        assertEquals("John", savedOwner.getFirstName());  // Ensure the saved owner's first name is "John"
+        assertEquals("John", savedOwner.firstName());  // Ensure the saved owner's first name is "John"
     }
 }

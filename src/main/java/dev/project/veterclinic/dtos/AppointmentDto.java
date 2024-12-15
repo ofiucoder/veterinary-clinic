@@ -11,6 +11,6 @@ public record AppointmentDto(
     String reason,
     AppointmentStatus status,
     int petId,
-    int ownerDni
+    String ownerDni
 ) {
 }

@@ -16,7 +16,7 @@ import dev.project.veterclinic.services.AppointmentService;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "${api-endpoint}/appointments")
+@RequestMapping(path = "/api/v1/appointments")
 public class AppointmentController {
 
     private final AppointmentService service;
@@ -70,7 +70,7 @@ public class AppointmentController {
                entity.type() == null || 
                entity.reason() == null || entity.reason().trim().isEmpty() || 
                entity.status() == null || 
-               entity.ownerDni() <= 0;
+               entity.ownerDni() == null;
     }
     
     // Helper method to check if there is an existing appointment with the same owner_id and date
